@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (isRegister) {
       greetingEl.textContent = getTimeGreeting() + ' Welcome — create your account.';
     } else {
-      greetingEl.textContent = getTimeGreeting() + ' Welcome back — sign in to continue.';
+      greetingEl.textContent = getTimeGreeting() + ' Welcome back — Login in to continue.';
     }
   }
   updateLoginGreeting();
