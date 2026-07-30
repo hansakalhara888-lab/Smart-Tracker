@@ -23,8 +23,14 @@ onAppReady(() => {
   const customCatChips = document.getElementById('custom-cat-chips');
   const transferForm = document.getElementById('transfer-form');
   const transferAmountInput = document.getElementById('transfer-amount');
+  const txPagination = document.getElementById('tx-pagination');
+  const txPagePrev = document.getElementById('tx-page-prev');
+  const txPageNext = document.getElementById('tx-page-next');
+  const txPageInfo = document.getElementById('tx-page-info');
 
   const WALLETS = ['Cash', 'Bank', 'Card'];
+  const TX_PAGE_SIZE = 15;
+  let txPage = 1;
   let formDirty = false;
   let suppressDirty = false;
 
@@ -134,11 +140,15 @@ onAppReady(() => {
       return;
     }
     customCatChips.innerHTML = custom
-      .map(
-        (name) =>
-          `<span class="cat-chip">${escapeHtml(name)}` +
-          `<button type="button" data-remove-cat="${escapeAttr(name)}" title="Remove">×</button></span>`
-      )
+      .map(function (name) {
+        return (
+          '<span class="cat-chip">' +
+          escapeHtml(name) +
+          '<button type="button" data-remove-cat="' +
+          escapeAttr(name) +
+          '" title="Remove">×</button></span>'
+        );
+      })
       .join('');
     customCatChips.querySelectorAll('[data-remove-cat]').forEach((btn) => {
       btn.addEventListener('click', () => {
@@ -196,7 +206,7 @@ onAppReady(() => {
       typeSelect &&
       typeSelect.value === 'expense' &&
       categorySelect.value === 'Bills' &&
-      !editingIdInput.value;
+      !(editingIdInput && editingIdInput.value);
     billMonthlyBox.style.display = isBills ? 'block' : 'none';
     if (!isBills) {
       const no = document.getElementById('bill-monthly-no');
@@ -271,15 +281,10 @@ onAppReady(() => {
     return bal;
   }
 
-  /** Current wallet balances (from all saved transactions). */
   function currentWallets() {
     return computeWalletBalances(getStorageData(KEYS.TRANSACTIONS));
   }
 
-  /**
-   * How much can still leave this wallet.
-   * When editing an expense that already used this wallet, credit back the old amount.
-   */
   function availableInWallet(wallet, options) {
     options = options || {};
     const bal = currentWallets();
@@ -328,7 +333,6 @@ onAppReady(() => {
     setCategoryOptions(typeSelect.value);
     if (accountSelect) accountSelect.value = WALLETS.includes(tx.account) ? tx.account : 'Cash';
     if (categorySelect && tx.type !== 'income') {
-      // ensure category option exists (including custom/historical)
       if (!Array.from(categorySelect.options).some((o) => o.value === tx.category)) {
         const opt = document.createElement('option');
         opt.value = tx.category;
@@ -348,7 +352,7 @@ onAppReady(() => {
     suppressDirty = false;
     clearDirty();
 
-    form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (form) form.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   if (cancelEditBtn) {
@@ -363,71 +367,6 @@ onAppReady(() => {
     let incomeSum = 0;
     let expenseSum = 0;
 
-    if (!txListEl) return;
-    txListEl.innerHTML = '';
-
-    const visible = transactions.slice().reverse();
-
-    if (visible.length === 0) {
-      txListEl.innerHTML =
-        '<li style="color:var(--text-muted); padding:0.75rem 0;">No recent transactions found.</li>';
-    } else {
-      visible.forEach((tx) => {
-        if (tx.type === 'income') incomeSum += Number(tx.amount) || 0;
-        else if (tx.type === 'expense') expenseSum += Number(tx.amount) || 0;
-
-        const li = document.createElement('li');
-        li.style.padding = '0.75rem 0';
-        li.style.borderBottom = '1px solid var(--border-color)';
-
-        if (tx.type === 'transfer') {
-          li.innerHTML = `
-          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
-            <div>
-              <strong>Transfer</strong>
-              <small style="color:var(--text-muted);"> (${escapeHtml(tx.fromAccount)} → ${escapeHtml(tx.toAccount)})</small><br>
-              <small style="color:var(--text-muted);">${escapeHtml(tx.description || '')} · ${escapeHtml(tx.date)}</small>
-            </div>
-            <div style="display:flex; align-items:center; gap:0.75rem;">
-              <span style="color:var(--primary-color); font-weight:bold;">
-                ${formatMoney(tx.amount)}
-              </span>
-              <button type="button" data-del-tx="${tx.id}" style="background:#ef4444; color:white; border:none; padding:0.3rem 0.6rem; border-radius:5px; cursor:pointer; font-size:0.8rem;">
-                Delete
-              </button>
-            </div>
-          </div>`;
-        } else {
-          const color = tx.type === 'expense' ? 'var(--danger)' : 'var(--success)';
-          const acc = tx.account || 'Cash';
-          li.innerHTML = `
-          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
-            <div>
-              <strong>${escapeHtml(tx.description)}</strong>
-              <small style="color:var(--text-muted);"> (${escapeHtml(tx.category)} · ${escapeHtml(acc)})</small><br>
-              <small style="color:var(--text-muted);">${escapeHtml(tx.date)}</small>
-            </div>
-            <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
-              <span style="color:${color}; font-weight:bold;">
-                ${tx.type === 'expense' ? '-' : '+'}${formatMoney(tx.amount)}
-              </span>
-              <button type="button" data-edit-tx="${tx.id}" style="background:var(--bg-color); color:var(--text-color); border:1px solid var(--border-color); padding:0.3rem 0.6rem; border-radius:5px; cursor:pointer; font-size:0.8rem;">
-                Edit
-              </button>
-              <button type="button" data-del-tx="${tx.id}" style="background:#ef4444; color:white; border:none; padding:0.3rem 0.6rem; border-radius:5px; cursor:pointer; font-size:0.8rem;">
-                Delete
-              </button>
-            </div>
-          </div>`;
-        }
-        txListEl.appendChild(li);
-      });
-    }
-
-    // income/expense only from non-transfer (already counted above correctly for all in list)
-    // Recompute properly in case list was partial — use full array
-    incomeSum = 0;
-    expenseSum = 0;
     transactions.forEach((tx) => {
       if (tx.type === 'income') incomeSum += Number(tx.amount) || 0;
       else if (tx.type === 'expense') expenseSum += Number(tx.amount) || 0;
@@ -442,7 +381,6 @@ onAppReady(() => {
     if (walletBankEl) walletBankEl.textContent = formatMoney(wallets.Bank);
     if (walletCardEl) walletCardEl.textContent = formatMoney(wallets.Card);
 
-    // Overall balance must equal sum of wallets
     const walletSum = (wallets.Cash || 0) + (wallets.Bank || 0) + (wallets.Card || 0);
     const netBalance = incomeSum - expenseSum;
     const sumEl = document.getElementById('wallet-sum-check');
@@ -453,7 +391,101 @@ onAppReady(() => {
         : '⚠ Wallets ' + formatMoney(walletSum) + ' vs Balance ' + formatMoney(netBalance);
       sumEl.style.color = ok ? 'var(--success)' : 'var(--danger)';
     }
-    // Prefer overall balance number from same net (already set above)
+
+    if (!txListEl) return;
+    txListEl.innerHTML = '';
+
+    const newestFirst = transactions.slice().reverse();
+    const total = newestFirst.length;
+    const totalPages = Math.max(1, Math.ceil(total / TX_PAGE_SIZE));
+    if (txPage > totalPages) txPage = totalPages;
+    if (txPage < 1) txPage = 1;
+
+    const start = (txPage - 1) * TX_PAGE_SIZE;
+    const pageItems = newestFirst.slice(start, start + TX_PAGE_SIZE);
+
+    if (total === 0) {
+      txListEl.innerHTML =
+        '<li style="color:var(--text-muted); padding:0.75rem 0;">No recent transactions found.</li>';
+      if (txPagination) txPagination.style.display = 'none';
+    } else {
+      pageItems.forEach((tx) => {
+        const li = document.createElement('li');
+        li.style.padding = '0.75rem 0';
+        li.style.borderBottom = '1px solid var(--border-color)';
+
+        if (tx.type === 'transfer') {
+          li.innerHTML =
+            '<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">' +
+            '<div><strong>Transfer</strong>' +
+            '<small style="color:var(--text-muted);"> (' +
+            escapeHtml(tx.fromAccount) +
+            ' → ' +
+            escapeHtml(tx.toAccount) +
+            ')</small><br>' +
+            '<small style="color:var(--text-muted);">' +
+            escapeHtml(tx.description || '') +
+            ' · ' +
+            escapeHtml(tx.date) +
+            '</small></div>' +
+            '<div style="display:flex; align-items:center; gap:0.75rem;">' +
+            '<span style="color:var(--primary-color); font-weight:bold;">' +
+            formatMoney(tx.amount) +
+            '</span>' +
+            '<button type="button" data-del-tx="' +
+            tx.id +
+            '" style="background:#ef4444; color:white; border:none; padding:0.3rem 0.6rem; border-radius:5px; cursor:pointer; font-size:0.8rem;">Delete</button>' +
+            '</div></div>';
+        } else {
+          const color = tx.type === 'expense' ? 'var(--danger)' : 'var(--success)';
+          const acc = tx.account || 'Cash';
+          li.innerHTML =
+            '<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">' +
+            '<div><strong>' +
+            escapeHtml(tx.description) +
+            '</strong>' +
+            '<small style="color:var(--text-muted);"> (' +
+            escapeHtml(tx.category) +
+            ' · ' +
+            escapeHtml(acc) +
+            ')</small><br>' +
+            '<small style="color:var(--text-muted);">' +
+            escapeHtml(tx.date) +
+            '</small></div>' +
+            '<div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">' +
+            '<span style="color:' +
+            color +
+            '; font-weight:bold;">' +
+            (tx.type === 'expense' ? '-' : '+') +
+            formatMoney(tx.amount) +
+            '</span>' +
+            '<button type="button" data-edit-tx="' +
+            tx.id +
+            '" style="background:var(--bg-color); color:var(--text-color); border:1px solid var(--border-color); padding:0.3rem 0.6rem; border-radius:5px; cursor:pointer; font-size:0.8rem;">Edit</button>' +
+            '<button type="button" data-del-tx="' +
+            tx.id +
+            '" style="background:#ef4444; color:white; border:none; padding:0.3rem 0.6rem; border-radius:5px; cursor:pointer; font-size:0.8rem;">Delete</button>' +
+            '</div></div>';
+        }
+        txListEl.appendChild(li);
+      });
+
+      if (txPagination) {
+        if (totalPages <= 1) {
+          txPagination.style.display = 'none';
+        } else {
+          txPagination.style.display = 'flex';
+          const from = start + 1;
+          const to = start + pageItems.length;
+          if (txPageInfo) {
+            txPageInfo.textContent =
+              'Page ' + txPage + ' of ' + totalPages + ' · showing ' + from + '–' + to + ' of ' + total;
+          }
+          if (txPagePrev) txPagePrev.disabled = txPage <= 1;
+          if (txPageNext) txPageNext.disabled = txPage >= totalPages;
+        }
+      }
+    }
 
     txListEl.querySelectorAll('[data-edit-tx]').forEach((btn) => {
       btn.addEventListener('click', () => startEdit(Number(btn.getAttribute('data-edit-tx'))));
@@ -461,22 +493,37 @@ onAppReady(() => {
     txListEl.querySelectorAll('[data-del-tx]').forEach((btn) => {
       btn.addEventListener('click', () => {
         const id = Number(btn.getAttribute('data-del-tx'));
-        const transactions = getStorageData(KEYS.TRANSACTIONS);
-        const targetTx = transactions.find((tx) => tx.id === id);
+        const list = getStorageData(KEYS.TRANSACTIONS);
+        const targetTx = list.find((tx) => tx.id === id);
         if (!targetTx) return;
         const label =
           targetTx.type === 'transfer'
-            ? `Transfer ${targetTx.fromAccount} → ${targetTx.toAccount} — ${formatMoney(targetTx.amount)}`
-            : `"${targetTx.description}" — ${formatMoney(targetTx.amount)}`;
-        if (!confirm(`Delete this transaction?\n\n${label}`)) return;
+            ? 'Transfer ' + targetTx.fromAccount + ' → ' + targetTx.toAccount + ' — ' + formatMoney(targetTx.amount)
+            : '"' + targetTx.description + '" — ' + formatMoney(targetTx.amount);
+        if (!confirm('Delete this transaction?\n\n' + label)) return;
         syncSavingsOnTxDelete(targetTx);
         setStorageData(
           KEYS.TRANSACTIONS,
-          transactions.filter((tx) => tx.id !== id)
+          list.filter((tx) => tx.id !== id)
         );
         if (editingIdInput && editingIdInput.value === String(id)) exitEditMode();
         renderDashboard();
       });
+    });
+  }
+
+  if (txPagePrev) {
+    txPagePrev.addEventListener('click', () => {
+      if (txPage > 1) {
+        txPage -= 1;
+        renderDashboard();
+      }
+    });
+  }
+  if (txPageNext) {
+    txPageNext.addEventListener('click', () => {
+      txPage += 1;
+      renderDashboard();
     });
   }
 
@@ -496,7 +543,6 @@ onAppReady(() => {
         return;
       }
 
-      // Cannot spend more than the wallet currently holds
       if (type === 'expense') {
         const available = availableInWallet(account, { excludeTxId: editingId || null });
         if (amount > available + 1e-9) {
@@ -527,13 +573,12 @@ onAppReady(() => {
         }
         const oldTx = Object.assign({}, transactions[idx]);
         const updated = Object.assign({}, transactions[idx], {
-          type,
-          category,
-          account,
-          amount,
-          description
+          type: type,
+          category: category,
+          account: account,
+          amount: amount,
+          description: description
         });
-        // If this is linked to a savings goal, block amounts that exceed the target
         if (
           (oldTx.category === 'Savings Deposit' ||
             (oldTx.description && String(oldTx.description).startsWith('Daily Savings contribution for: '))) &&
@@ -558,7 +603,6 @@ onAppReady(() => {
             }
           }
         }
-        // Keep savings description linked to the goal when still a savings deposit
         syncSavingsOnTxUpdate(oldTx, updated);
         transactions[idx] = updated;
         setStorageData(KEYS.TRANSACTIONS, transactions);
@@ -570,11 +614,11 @@ onAppReady(() => {
 
       transactions.push({
         id: Date.now(),
-        type,
-        category,
-        account,
-        amount,
-        description,
+        type: type,
+        category: category,
+        account: account,
+        amount: amount,
+        description: description,
         date: new Date().toISOString().slice(0, 10)
       });
       setStorageData(KEYS.TRANSACTIONS, transactions);
@@ -586,15 +630,15 @@ onAppReady(() => {
           const y = today.getFullYear();
           const m = String(today.getMonth() + 1).padStart(2, '0');
           const d = String(today.getDate()).padStart(2, '0');
-          const todayStr = `${y}-${m}-${d}`;
+          const todayStr = y + '-' + m + '-' + d;
           addCalendarEvent({
             id: Date.now() + 1,
             title: description,
             date: todayStr,
             time: '09:00',
             remindMinutes: 0,
-            description: `Bill paid (${formatMoney(amount)})`,
-            amount,
+            description: 'Bill paid (' + formatMoney(amount) + ')',
+            amount: amount,
             type: 'bill',
             recurring: false
           });
@@ -602,6 +646,7 @@ onAppReady(() => {
         }
       }
 
+      txPage = 1;
       exitEditMode();
       renderDashboard();
     });
@@ -647,8 +692,8 @@ onAppReady(() => {
         type: 'transfer',
         fromAccount: from,
         toAccount: to,
-        amount,
-        description: note || `Transfer ${from} → ${to}`,
+        amount: amount,
+        description: note || 'Transfer ' + from + ' → ' + to,
         category: 'Transfer',
         date: new Date().toISOString().slice(0, 10)
       });
@@ -657,7 +702,8 @@ onAppReady(() => {
       document.getElementById('transfer-from').value = 'Cash';
       document.getElementById('transfer-to').value = 'Bank';
       clearDirty();
-      showInAppToast(`Transferred ${formatMoney(amount)} from ${from} to ${to}`);
+      txPage = 1;
+      showInAppToast('Transferred ' + formatMoney(amount) + ' from ' + from + ' to ' + to);
       renderDashboard();
     });
   }
