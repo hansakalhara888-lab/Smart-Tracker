@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Savings Target - Money Tracker</title>
+  <link rel="stylesheet" href="css/main.css">
+  
+</head>
+<body>
+<div id="app-loading-bar" aria-hidden="true"></div>
+
+<header class="app-header">
+  <div class="nav-container">
+    <a href="index.html" class="brand-logo">
+      <img src="images/logo 2.png" alt="SmartTracker Logo" class="brand-logo-img">
+    </a>
+
+        <nav class="nav-links" id="nav-links">
+      <a href="index.html" class="nav-link">Dashboard</a>
+      <a href="savings.html" class="nav-link active">Savings Target</a>
+      <a href="reports.html" class="nav-link">Reports</a>
+      <a href="calendar.html" class="nav-link">Calendar</a>
+      <a href="account.html" class="nav-link">Account</a>
+      <button type="button" class="mobile-menu-logout">Logout</button>
+    </nav>
+
+    <div class="nav-actions">
+      <button id="theme-toggle" class="btn-theme" type="button" aria-label="Toggle theme">🌙</button>
+      <button id="logout-btn" class="btn-logout" type="button">Logout</button>
+      <button id="hamburger-btn" class="hamburger-btn" type="button" aria-label="Open menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+    <section class="card">
+      <h2>Create New Savings Target</h2>
+      <form id="goal-form">
+        <div class="form-group">
+          <label for="item-name">Item Name</label>
+          <input type="text" id="item-name" placeholder="e.g., New Laptop" required>
+        </div>
+        <div class="form-group">
+          <label for="target-price">Target Price (Rs)</label>
+          <input type="number" id="target-price" required>
+        </div>
+        <button type="submit">Set Savings Goal</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Active Savings Goals</h2>
+      <div id="goals-container"></div>
+    </section>
+  </main>
+
+<footer class="app-footer">
+  <div class="footer-container">
+    
+    <!-- Left Column: Brand Info -->
+    <div class="footer-brand">
+      <h2>SmartTracker</h2>
+      <p>Empowering your financial journey with<br>modern tracking and actionable insights.</p>
+    </div>
+
+    <!-- Center Column: Quick Links -->
+        <div class="footer-links">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="index.html">Dashboard</a></li>
+        <li><a href="savings.html">Savings</a></li>
+        <li><a href="reports.html">Reports</a></li>
+        <li><a href="calendar.html">Calendar</a></li>
+        <li><a href="account.html">Account</a></li>
+      </ul>
+    </div>
+
+    <!-- Right Column: Logo Container -->
+    <div class="footer-logo-wrapper">
+      <img src="images/footer logo.png" alt="SmartTracker Logo" class="footer-logo-img">
+    </div>
+
+  </div>
+  
+  <div class="footer-bottom">
+    <p>&copy; 2026 SmartTracker. All rights reserved.</p>
+  </div>
+</footer>
+
+  <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="js/firebase-init.js"></script>
+<script src="js/main.js"></script>
+  <script src="js/savings.js"></script>
+</body>
+</html>

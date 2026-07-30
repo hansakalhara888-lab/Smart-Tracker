@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monthly Reports - Money Tracker</title>
+  <link rel="stylesheet" href="css/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<body>
+<div id="app-loading-bar" aria-hidden="true"></div>
+
+<header class="app-header">
+  <div class="nav-container">
+    <a href="index.html" class="brand-logo">
+      <img src="images/logo 2.png" alt="SmartTracker Logo" class="brand-logo-img">
+    </a>
+
+        <nav class="nav-links" id="nav-links">
+      <a href="index.html" class="nav-link">Dashboard</a>
+      <a href="savings.html" class="nav-link">Savings Target</a>
+      <a href="reports.html" class="nav-link active">Reports</a>
+      <a href="calendar.html" class="nav-link">Calendar</a>
+      <a href="account.html" class="nav-link">Account</a>
+      <button type="button" class="mobile-menu-logout">Logout</button>
+    </nav>
+
+    <div class="nav-actions">
+      <button id="theme-toggle" class="btn-theme" type="button" aria-label="Toggle theme">🌙</button>
+      <button id="logout-btn" class="btn-logout" type="button">Logout</button>
+      <button id="hamburger-btn" class="hamburger-btn" type="button" aria-label="Open menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+    <div id="auto-save-alert" style="display: none; background: #d1fae5; border: 1px solid #10b981; color: #065f46; padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; text-align: center; font-weight: 500;"></div>
+
+    <!-- Active Month Overview -->
+    <section class="card">
+      <h2>Current Month Overview</h2>
+      <div style="display: flex; gap:1rem; margin: 1rem 0;">
+        <div style="flex:1; background:var(--bg-color); padding:1rem; border-radius:8px; border:1px solid var(--border-color);">
+          <small style="color:var(--text-muted);">Total Income</small>
+          <h3 id="report-income" style="color:var(--success);">Rs. 0.00</h3>
+        </div>
+        <div style="flex:1; background:var(--bg-color); padding:1rem; border-radius:8px; border:1px solid var(--border-color);">
+          <small style="color:var(--text-muted);">Total Expenses</small>
+          <h3 id="report-expense" style="color:var(--danger);">Rs. 0.00</h3>
+        </div>
+      </div>
+
+      <!-- Graph Container -->
+      <div style="max-width: 400px; margin: 1.5rem auto 0 auto;">
+        <canvas id="categoryChart"></canvas>
+      </div>
+
+      <p style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--text-muted); text-align: center;">
+        ℹ️ Reports automatically archive at the end of every month.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Income vs Expenses (last 6 months)</h2>
+      <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">
+        Monthly totals from your transactions (transfers are not included).
+      </p>
+      <div style="position:relative; width:100%; max-width:720px; margin:0 auto; height:280px;">
+        <canvas id="trendChart"></canvas>
+      </div>
+      <p id="trend-empty" style="display:none; color:var(--text-muted); text-align:center; margin-top:1rem;">
+        No transaction history yet for a trend chart.
+      </p>
+    </section>
+
+    <!-- Saved Archives Section -->
+    <section class="card">
+      <h2>Saved Monthly Archives</h2>
+      <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">Click on any month below to view detailed transactions and category graphs.</p>
+      <ul id="archive-list" style="list-style: none;"></ul>
+    </section>
+  </main>
+
+<footer class="app-footer">
+  <div class="footer-container">
+    
+    <!-- Left Column: Brand Info -->
+    <div class="footer-brand">
+      <h2>SmartTracker</h2>
+      <p>Empowering your financial journey with<br>modern tracking and actionable insights.</p>
+    </div>
+
+    <!-- Center Column: Quick Links -->
+        <div class="footer-links">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="index.html">Dashboard</a></li>
+        <li><a href="savings.html">Savings</a></li>
+        <li><a href="reports.html">Reports</a></li>
+        <li><a href="calendar.html">Calendar</a></li>
+        <li><a href="account.html">Account</a></li>
+      </ul>
+    </div>
+
+    <!-- Right Column: Logo Container -->
+    <div class="footer-logo-wrapper">
+      <img src="images/footer logo.png" alt="SmartTracker Logo" class="footer-logo-img">
+    </div>
+
+  </div>
+  
+  <div class="footer-bottom">
+    <p>&copy; 2026 SmartTracker. All rights reserved.</p>
+  </div>
+</footer>
+
+  <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="js/firebase-init.js"></script>
+<script src="js/main.js"></script>
+  <script src="js/reports.js"></script>
+</body>
+</html>

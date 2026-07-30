@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Money Tracker</title>
+  <link rel="stylesheet" href="css/main.css">
+  
+</head>
+<body>
+
+<div id="app-loading-bar" aria-hidden="true"></div>
+
+<header class="app-header">
+  <div class="nav-container">
+    <a href="index.html" class="brand-logo">
+      <img src="images/logo 2.png" alt="SmartTracker Logo" class="brand-logo-img">
+    </a>
+
+        <nav class="nav-links" id="nav-links">
+      <a href="index.html" class="nav-link active">Dashboard</a>
+      <a href="savings.html" class="nav-link">Savings Target</a>
+      <a href="reports.html" class="nav-link">Reports</a>
+      <a href="calendar.html" class="nav-link">Calendar</a>
+      <a href="account.html" class="nav-link">Account</a>
+      <button type="button" class="mobile-menu-logout">Logout</button>
+    </nav>
+
+    <div class="nav-actions">
+      <button id="theme-toggle" class="btn-theme" type="button" aria-label="Toggle theme">🌙</button>
+      <button id="logout-btn" class="btn-logout" type="button">Logout</button>
+      <button id="hamburger-btn" class="hamburger-btn" type="button" aria-label="Open menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+
+  <main>
+    <section class="card" style="margin-bottom:1rem;">
+      <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+        <div style="flex:1; min-width:140px; background:var(--bg-color); padding:1rem; border-radius:8px; border:1px solid var(--border-color);">
+          <small style="color:var(--text-muted);">Balance</small>
+          <h3 id="total-balance" style="color:var(--primary-color); margin-top:0.25rem;">Rs. 0.00</h3>
+        </div>
+        <div style="flex:1; min-width:140px; background:var(--bg-color); padding:1rem; border-radius:8px; border:1px solid var(--border-color);">
+          <small style="color:var(--text-muted);">Total Income</small>
+          <h3 id="total-income" style="color:var(--success); margin-top:0.25rem;">Rs. 0.00</h3>
+        </div>
+        <div style="flex:1; min-width:140px; background:var(--bg-color); padding:1rem; border-radius:8px; border:1px solid var(--border-color);">
+          <small style="color:var(--text-muted);">Total Expenses</small>
+          <h3 id="total-expense" style="color:var(--danger); margin-top:0.25rem;">Rs. 0.00</h3>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" style="margin-bottom:1rem;">
+      <h2 style="margin-bottom:0.35rem;">Wallets</h2>
+      <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.75rem;">
+        Cash + Bank + Card always equals your overall <strong>Balance</strong>. Transfers only move money between wallets.
+      </p>
+      <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+        <div class="wallet-card" style="flex:1; min-width:120px; background:var(--bg-color); padding:1rem; border-radius:8px; border:1px solid var(--border-color);">
+          <small style="color:var(--text-muted);">💵 Cash</small>
+          <h3 id="wallet-cash" style="margin-top:0.25rem;">Rs. 0.00</h3>
+        </div>
+        <div class="wallet-card" style="flex:1; min-width:120px; background:var(--bg-color); padding:1rem; border-radius:8px; border:1px solid var(--border-color);">
+          <small style="color:var(--text-muted);">🏦 Bank</small>
+          <h3 id="wallet-bank" style="margin-top:0.25rem;">Rs. 0.00</h3>
+        </div>
+        <div class="wallet-card" style="flex:1; min-width:120px; background:var(--bg-color); padding:1rem; border-radius:8px; border:1px solid var(--border-color);">
+          <small style="color:var(--text-muted);">💳 Card</small>
+          <h3 id="wallet-card" style="margin-top:0.25rem;">Rs. 0.00</h3>
+        </div>
+      </div>
+      <p id="wallet-sum-check" style="font-size:0.85rem; color:var(--text-muted); margin-top:0.75rem;"></p>
+    </section>
+
+    <section class="card">
+      <h2 id="tx-form-title">Add Transaction</h2>
+      <form id="transaction-form">
+        <input type="hidden" id="editing-tx-id" value="">
+        <div class="form-group">
+          <label for="type">Type</label>
+          <select id="type" required>
+            <option value="expense">Expense</option>
+            <option value="income">Income</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="account">Wallet / Account</label>
+          <select id="account" required>
+            <option value="Cash">Cash</option>
+            <option value="Bank">Bank</option>
+            <option value="Card">Card</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="category">Category</label>
+          <select id="category" required>
+            <option value="Food">Food</option>
+            <option value="Transport">Transport</option>
+            <option value="Bills">Bills</option>
+            <option value="Shopping">Shopping</option>
+            <option value="Savings Deposit">Savings Deposit</option>
+            <option value="Other">Other</option>
+          </select>
+          <div id="custom-cat-panel">
+            <div class="custom-cat-row">
+              <input type="text" id="new-category-input" placeholder="Add custom category…" maxlength="40" autocomplete="off">
+              <button type="button" class="btn-add-cat" id="add-category-btn">+ Add</button>
+            </div>
+            <p class="custom-cat-hint">Built-in categories stay. Your custom ones appear in the list above.</p>
+            <div id="custom-cat-chips" class="custom-cat-chips"></div>
+          </div>
+        </div>
+
+        <div id="bill-monthly-box" class="bill-monthly-box" style="display:none;">
+          <p class="bill-monthly-q">Are you paying this every month?</p>
+          <div class="bill-monthly-options">
+            <label><input type="radio" name="bill-monthly" id="bill-monthly-yes" value="yes"> Yes — also add this bill to Calendar</label>
+            <label><input type="radio" name="bill-monthly" id="bill-monthly-no" value="no" checked> No — expense only (no calendar)</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="amount">Amount</label>
+          <input type="text" id="amount" inputmode="decimal" placeholder="e.g., 1,500.00" required autocomplete="off">
+        </div>
+
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input type="text" id="description" placeholder="e.g., Grocery shopping" required>
+        </div>
+
+        <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+          <button type="submit" id="tx-submit-btn">Record Transaction</button>
+          <button type="button" id="tx-cancel-edit" class="btn-secondary" style="display:none;">Cancel edit</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Transfer between wallets</h2>
+      <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:0.75rem;">Move money between Cash, Bank, and Card. This does not change total income or expenses. You cannot transfer or spend more than a wallet currently has.</p>
+      <form id="transfer-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="transfer-from">From</label>
+            <select id="transfer-from" required>
+              <option value="Cash">Cash</option>
+              <option value="Bank">Bank</option>
+              <option value="Card">Card</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="transfer-to">To</label>
+            <select id="transfer-to" required>
+              <option value="Bank">Bank</option>
+              <option value="Cash">Cash</option>
+              <option value="Card">Card</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="transfer-amount">Amount</label>
+          <input type="text" id="transfer-amount" inputmode="decimal" placeholder="e.g., 5,000.00" required autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label for="transfer-note">Note (optional)</label>
+          <input type="text" id="transfer-note" placeholder="e.g., ATM withdrawal">
+        </div>
+        <button type="submit">Transfer</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Recent Transactions</h2>
+      <ul id="transaction-list" style="list-style: none; margin-top: 1rem;"></ul>
+    </section>
+  </main>
+
+<footer class="app-footer">
+  <div class="footer-container">
+    
+    <!-- Left Column: Brand Info -->
+    <div class="footer-brand">
+      <h2>SmartTracker</h2>
+      <p>Empowering your financial journey with<br>modern tracking and actionable insights.</p>
+    </div>
+
+    <!-- Center Column: Quick Links -->
+        <div class="footer-links">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="index.html">Dashboard</a></li>
+        <li><a href="savings.html">Savings</a></li>
+        <li><a href="reports.html">Reports</a></li>
+        <li><a href="calendar.html">Calendar</a></li>
+        <li><a href="account.html">Account</a></li>
+      </ul>
+    </div>
+
+    <!-- Right Column: Logo Container -->
+    <div class="footer-logo-wrapper">
+      <img src="images/footer logo.png" alt="SmartTracker Logo" class="footer-logo-img">
+    </div>
+
+  </div>
+  
+  <div class="footer-bottom">
+    <p>&copy; 2026 SmartTracker. All rights reserved.</p>
+  </div>
+</footer>
+
+  <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="js/firebase-init.js"></script>
+<script src="js/main.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

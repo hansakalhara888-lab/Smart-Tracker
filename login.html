@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account Access - Money Tracker</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+  <!-- Floating Dark/Light Mode Button -->
+  <button id="theme-toggle" class="theme-toggle-btn">🌙</button>
+
+  <main class="login-container">
+    <div class="login-brand">
+      <img src="images/logo 2.png" alt="SmartTracker Logo" class="login-brand-logo">
+      <h1 class="login-brand-name">Smart<span>Tracker</span></h1>
+      <p class="login-brand-tagline">Track income, expenses, savings and bills in one place.</p>
+      <p id="login-greeting" class="login-greeting"></p>
+    </div>
+
+    <section class="card login-card" style="max-width: 420px; width: 100%; margin: 2rem auto; padding: 2rem; border-radius: 10px;">
+      
+      <!-- REGISTER FORM -->
+      <div id="register-box">
+        <h2>Create Account</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Set up your account details and password.</p>
+        
+        <form id="register-form" style="margin-top: 1rem; display: flex; flex-direction: column; gap: 0.8rem;">
+          <div>
+            <label style="display: block; margin-bottom: 0.2rem; font-size: 0.85rem;">Username</label>
+            <input type="text" id="reg-username" required style="width: 100%; padding: 0.6rem; border-radius: 6px;">
+          </div>
+          <div>
+            <label style="display: block; margin-bottom: 0.2rem; font-size: 0.85rem;">Full Name</label>
+            <input type="text" id="reg-fullname" required style="width: 100%; padding: 0.6rem; border-radius: 6px;">
+          </div>
+          <div style="display: flex; gap: 0.5rem;">
+            <div style="flex: 1;">
+              <label style="display: block; margin-bottom: 0.2rem; font-size: 0.85rem;">Age</label>
+              <input type="number" id="reg-age" required min="1" style="width: 100%; padding: 0.6rem; border-radius: 6px;">
+            </div>
+            <div style="flex: 1.5;">
+              <label style="display: block; margin-bottom: 0.2rem; font-size: 0.85rem;">Birthday</label>
+              <input type="date" id="reg-dob" required style="width: 100%; padding: 0.6rem; border-radius: 6px;">
+            </div>
+          </div>
+          <div>
+            <label style="display: block; margin-bottom: 0.2rem; font-size: 0.85rem;">Password</label>
+            <input type="password" id="reg-password" required style="width: 100%; padding: 0.6rem; border-radius: 6px;">
+          </div>
+          <div>
+            <label style="display: block; margin-bottom: 0.2rem; font-size: 0.85rem;">Re-enter Password</label>
+            <input type="password" id="reg-confirm-password" required style="width: 100%; padding: 0.6rem; border-radius: 6px;">
+          </div>
+
+          <div id="register-error" style="color: var(--danger); font-size: 0.85rem; display: none;"></div>
+
+          <button type="submit" style="padding: 0.75rem; border-radius: 6px; cursor: pointer; margin-top: 0.5rem;">Create Account & Login</button>
+        </form>
+
+        <p style="margin-top: 1rem; font-size: 0.85rem; text-align: center; color: var(--text-muted);">
+          Already have an account? <a href="#" id="to-login-btn" style="color: var(--primary); font-weight: bold;">Login here</a>
+        </p>
+      </div>
+
+      <!-- LOGIN FORM -->
+      <div id="login-box" style="display: none;">
+        <h2>Account Login</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Enter your username and password.</p>
+        
+        <form id="login-form" style="margin-top: 1rem; display: flex; flex-direction: column; gap: 0.8rem;">
+          <div>
+            <label style="display: block; margin-bottom: 0.2rem; font-size: 0.85rem;">Username</label>
+            <input type="text" id="login-username" required style="width: 100%; padding: 0.6rem; border-radius: 6px;">
+          </div>
+          <div>
+            <label style="display: block; margin-bottom: 0.2rem; font-size: 0.85rem;">Password</label>
+            <input type="password" id="login-password" required style="width: 100%; padding: 0.6rem; border-radius: 6px;">
+          </div>
+
+          <div id="login-error" style="color: var(--danger); font-size: 0.85rem; display: none;"></div>
+
+          <button type="submit" style="padding: 0.75rem; border-radius: 6px; cursor: pointer; margin-top: 0.5rem;">Login</button>
+        </form>
+
+        <p style="margin-top: 1rem; font-size: 0.85rem; text-align: center; color: var(--text-muted);">
+          Need to set up a new profile? <a href="#" id="to-register-btn" style="color: var(--primary); font-weight: bold;">Create Account</a>
+        </p>
+      </div>
+
+    </section>
+  </main>
+
+  <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/firebase-init.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/login.js"></script>
+</body>
+</html>
