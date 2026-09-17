@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <link href="manifest.json" rel="manifest"/>
+  <link href="icons/apple-touch-icon.png" rel="apple-touch-icon"/>
+  <meta content="#4f46e5" name="theme-color"/>
+  <meta content="yes" name="mobile-web-app-capable"/>
+  <meta content="yes" name="apple-mobile-web-app-capable"/>
+  <meta content="SmartTracker" name="apple-mobile-web-app-title"/>
+  <title>
+   Monthly Reports - Money Tracker
+  </title>
+  <link href="css/main.css" rel="stylesheet"/>
+  <link href="css/reports.css" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js">
+  </script>
+  <link href="css/features.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div aria-hidden="true" id="app-loading-bar">
+  </div>
+  <header class="app-header">
+   <div class="nav-container">
+    <a class="brand-logo" href="index.html">
+     <img alt="SmartTracker Logo" class="brand-logo-img" src="images/logo 2.png"/>
+    </a>
+    <nav class="nav-links" id="nav-links">
+     <a class="nav-link" href="index.html">
+      Dashboard
+     </a>
+     <a class="nav-link" href="transactions.html">
+      Transactions
+     </a>
+     <a class="nav-link" href="savings.html">
+      Savings Target
+     </a>
+     <a class="nav-link" href="planning.html">
+      Planning
+     </a>
+     <a class="nav-link active" href="reports.html">
+      Reports
+     </a>
+     <a class="nav-link" href="calendar.html">
+      Calendar
+     </a>
+     <a class="nav-link" href="account.html">
+      Account
+     </a>
+     <button class="mobile-menu-logout" type="button">
+      Logout
+     </button>
+    </nav>
+    <div class="nav-actions">
+     <button aria-label="Toggle theme" class="btn-theme" id="theme-toggle" type="button">
+      🌙
+     </button>
+     <button class="btn-logout" id="logout-btn" type="button">
+      Logout
+     </button>
+     <button aria-expanded="false" aria-label="Open menu" class="hamburger-btn" id="hamburger-btn" type="button">
+      <span>
+      </span>
+      <span>
+      </span>
+      <span>
+      </span>
+     </button>
+    </div>
+   </div>
+  </header>
+  <main>
+   <div id="auto-save-alert">
+   </div>
+   <!-- Active Month Overview -->
+   <section class="card">
+    <h2>
+     Current Month Overview
+    </h2>
+    <div class="reports-style-1">
+     <div class="reports-style-2">
+      <small class="reports-style-3">
+       Opening Balance
+      </small>
+      <h3 id="report-opening">
+       Rs. 0.00
+      </h3>
+     </div>
+     <div class="reports-style-2">
+      <small class="reports-style-3">
+       Total Income
+      </small>
+      <h3 id="report-income">
+       Rs. 0.00
+      </h3>
+     </div>
+     <div class="reports-style-2">
+      <small class="reports-style-3">
+       Total Expenses
+      </small>
+      <h3 id="report-expense">
+       Rs. 0.00
+      </h3>
+     </div>
+     <div class="reports-style-2">
+      <small class="reports-style-3">
+       Total Savings
+      </small>
+      <h3 id="report-savings">
+       Rs. 0.00
+      </h3>
+     </div>
+     <div class="reports-style-2">
+      <small class="reports-style-3">
+       Current Balance
+      </small>
+      <h3 id="report-closing">
+       Rs. 0.00
+      </h3>
+     </div>
+    </div>
+    <!-- Graph Container -->
+    <div class="reports-style-4">
+     <canvas id="categoryChart">
+     </canvas>
+    </div>
+    <p class="reports-style-5">
+     ℹ️ Reports automatically archive at the end of every month.
+    </p>
+   </section>
+   <section class="card">
+    <h2>
+     Report Explorer
+    </h2>
+    <p class="section-note">
+     View weekly, monthly or a custom date range.
+    </p>
+    <div class="inline-form report-range-controls">
+     <div class="form-group">
+      <label>
+       Range
+      </label>
+      <select id="range-kind">
+       <option value="weekly">
+        Last 7 days
+       </option>
+       <option value="monthly">
+        This month
+       </option>
+       <option value="custom">
+        Custom range
+       </option>
+      </select>
+     </div>
+     <div class="form-group">
+      <label>
+       From
+      </label>
+      <input id="range-from" type="date"/>
+     </div>
+     <div class="form-group">
+      <label>
+       To
+      </label>
+      <input id="range-to" type="date"/>
+     </div>
+     <div class="form-group report-action-group">
+      <label aria-hidden="true" class="report-spacer-label">
+       Action
+      </label>
+      <button id="range-report-btn" type="button">
+       Build Report
+      </button>
+     </div>
+    </div>
+    <div class="feature-grid" id="range-report-summary">
+    </div>
+    <div id="range-category-breakdown">
+    </div>
+   </section>
+   <section class="card">
+    <h2>
+     Compare Months
+    </h2>
+    <div class="inline-form compare-month-controls">
+     <div class="form-group">
+      <label>
+       Month A
+      </label>
+      <input id="compare-a" type="month"/>
+     </div>
+     <div class="form-group">
+      <label>
+       Month B
+      </label>
+      <input id="compare-b" type="month"/>
+     </div>
+     <div class="form-group report-action-group">
+      <label aria-hidden="true" class="report-spacer-label">
+       Action
+      </label>
+      <button id="compare-btn" type="button">
+       Compare
+      </button>
+     </div>
+    </div>
+    <div class="feature-grid" id="compare-result">
+    </div>
+   </section>
+   <section class="card yearly-report-card">
+    <h2>
+     Yearly Report
+    </h2>
+    <div class="inline-form yearly-report-controls">
+     <div class="form-group">
+      <label>
+       Year
+      </label>
+      <input id="year-report-input" max="2100" min="2000" type="number"/>
+     </div>
+     <div class="form-group yearly-action-group">
+      <label aria-hidden="true" class="yearly-spacer-label">
+       Action
+      </label>
+      <button id="year-report-btn" type="button">
+       Build Year Report
+      </button>
+     </div>
+     <div class="form-group yearly-action-group">
+      <label aria-hidden="true" class="yearly-spacer-label">
+       Action
+      </label>
+      <button class="btn-secondary" id="export-csv-btn" type="button">
+       Export CSV
+      </button>
+     </div>
+     <div class="form-group yearly-action-group">
+      <label aria-hidden="true" class="yearly-spacer-label">
+       Action
+      </label>
+      <button class="btn-secondary" id="export-pdf-btn" type="button">
+       Export PDF
+      </button>
+     </div>
+    </div>
+    <div class="feature-grid" id="year-report-summary">
+    </div>
+    <div class="chart-box">
+     <canvas id="year-chart">
+     </canvas>
+    </div>
+   </section>
+   <section class="card">
+    <h2>
+     Income vs Expenses (last 6 months)
+    </h2>
+    <p class="reports-style-6">
+     Monthly totals from your transactions (transfers are not included).
+    </p>
+    <div class="reports-style-7">
+     <canvas id="trendChart">
+     </canvas>
+    </div>
+    <p id="trend-empty">
+     No transaction history yet for a trend chart.
+    </p>
+   </section>
+   <!-- Saved Archives Section -->
+   <section class="card">
+    <h2>
+     Saved Monthly Archives
+    </h2>
+    <p class="reports-style-6">
+     Click on any month below to view detailed transactions and category graphs.
+    </p>
+    <ul id="archive-list">
+    </ul>
+   </section>
+  </main>
+  <footer class="app-footer">
+   <div class="footer-container">
+    <!-- Left Column: Brand Info -->
+    <div class="footer-brand">
+     <h1>
+      SmartTracker
+     </h1>
+     <p>
+      Empowering your financial journey with
+      <br/>
+      modern tracking and actionable insights.
+     </p>
+    </div>
+    <!-- Center Column: Quick Links -->
+    <div class="footer-links">
+     <h3>
+      Quick Links
+     </h3>
+     <ul>
+      <li>
+       <a href="index.html">
+        Dashboard
+       </a>
+      </li>
+      <li>
+       <a href="transactions.html">
+        Transactions
+       </a>
+      </li>
+      <li>
+       <a href="savings.html">
+        Savings
+       </a>
+      </li>
+      <li>
+       <a href="planning.html">
+        Planning
+       </a>
+      </li>
+      <li>
+       <a href="reports.html">
+        Reports
+       </a>
+      </li>
+      <li>
+       <a href="calendar.html">
+        Calendar
+       </a>
+      </li>
+      <li>
+       <a href="account.html">
+        Account
+       </a>
+      </li>
+     </ul>
+    </div>
+    <!-- Right Column: Logo Container -->
+    <div class="footer-logo-wrapper">
+     <img alt="SmartTracker Logo" class="footer-logo-img" src="images/footer logo.png"/>
+    </div>
+   </div>
+   <div class="footer-bottom">
+    <p>
+     © 2026 SmartTracker. All rights reserved.
+    </p>
+   </div>
+  </footer>
+  <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js">
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth-compat.js">
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js">
+  </script>
+  <script src="js/firebase-config.js">
+  </script>
+  <script src="js/firebase-init.js">
+  </script>
+  <script src="js/main.js">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js">
+  </script>
+  <script src="js/reports.js">
+  </script>
+ </body>
+</html>

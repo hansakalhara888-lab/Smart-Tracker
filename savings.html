@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <link href="manifest.json" rel="manifest"/>
+  <link href="icons/apple-touch-icon.png" rel="apple-touch-icon"/>
+  <meta content="#4f46e5" name="theme-color"/>
+  <meta content="yes" name="mobile-web-app-capable"/>
+  <meta content="yes" name="apple-mobile-web-app-capable"/>
+  <meta content="SmartTracker" name="apple-mobile-web-app-title"/>
+  <title>
+   Savings Target - Money Tracker
+  </title>
+  <link href="css/main.css" rel="stylesheet"/>
+  <link href="css/savings.css" rel="stylesheet"/>
+  <link href="css/features.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div aria-hidden="true" id="app-loading-bar">
+  </div>
+  <header class="app-header">
+   <div class="nav-container">
+    <a class="brand-logo" href="index.html">
+     <img alt="SmartTracker Logo" class="brand-logo-img" src="images/logo 2.png"/>
+    </a>
+    <nav class="nav-links" id="nav-links">
+     <a class="nav-link" href="index.html">
+      Dashboard
+     </a>
+     <a class="nav-link" href="transactions.html">
+      Transactions
+     </a>
+     <a class="nav-link active" href="savings.html">
+      Savings Target
+     </a>
+     <a class="nav-link" href="planning.html">
+      Planning
+     </a>
+     <a class="nav-link" href="reports.html">
+      Reports
+     </a>
+     <a class="nav-link" href="calendar.html">
+      Calendar
+     </a>
+     <a class="nav-link" href="account.html">
+      Account
+     </a>
+     <button class="mobile-menu-logout" type="button">
+      Logout
+     </button>
+    </nav>
+    <div class="nav-actions">
+     <button aria-label="Toggle theme" class="btn-theme" id="theme-toggle" type="button">
+      🌙
+     </button>
+     <button class="btn-logout" id="logout-btn" type="button">
+      Logout
+     </button>
+     <button aria-expanded="false" aria-label="Open menu" class="hamburger-btn" id="hamburger-btn" type="button">
+      <span>
+      </span>
+      <span>
+      </span>
+      <span>
+      </span>
+     </button>
+    </div>
+   </div>
+  </header>
+  <main>
+   <section class="card">
+    <h2>
+     Create New Savings Target
+    </h2>
+    <form id="goal-form">
+     <div class="form-group">
+      <label for="item-name">
+       Item Name
+      </label>
+      <input id="item-name" placeholder="e.g., New Laptop" required="" type="text"/>
+     </div>
+     <div class="form-group">
+      <label for="goal-type">
+       Goal type
+      </label>
+      <select id="goal-type">
+       <option value="normal">
+        Normal savings goal
+       </option>
+       <option value="emergency">
+        Emergency fund
+       </option>
+      </select>
+     </div>
+     <div class="form-group">
+      <label for="target-price">
+       Target Amount
+      </label>
+      <input id="target-price" min="0" step="0.01" type="number"/>
+      <small class="field-hint">
+       For Emergency Fund, leave 0 to calculate from recent monthly expenses.
+      </small>
+     </div>
+     <div class="form-row">
+      <div class="form-group">
+       <label for="goal-target-date">
+        Target date
+       </label>
+       <input id="goal-target-date" type="date"/>
+      </div>
+      <div class="form-group" id="emergency-months-box" style="display:none">
+       <label for="emergency-months">
+        Months of expenses
+       </label>
+       <select id="emergency-months">
+        <option value="3">
+         3 months
+        </option>
+        <option selected="" value="6">
+         6 months
+        </option>
+        <option value="9">
+         9 months
+        </option>
+        <option value="12">
+         12 months
+        </option>
+       </select>
+      </div>
+     </div>
+     <button type="submit">
+      Set Savings Goal
+     </button>
+    </form>
+   </section>
+   <section class="card">
+    <h2>
+     Active Savings Goals
+    </h2>
+    <p class="savings-note">
+     Creating a target does not change your balance. Only money you deposit into a target is recorded as a Savings Deposit transaction.
+    </p>
+    <div id="goals-container">
+    </div>
+   </section>
+  </main>
+  <footer class="app-footer">
+   <div class="footer-container">
+    <!-- Left Column: Brand Info -->
+    <div class="footer-brand">
+     <h1>
+      SmartTracker
+     </h1>
+     <p>
+      Empowering your financial journey with
+      <br/>
+      modern tracking and actionable insights.
+     </p>
+    </div>
+    <!-- Center Column: Quick Links -->
+    <div class="footer-links">
+     <h3>
+      Quick Links
+     </h3>
+     <ul>
+      <li>
+       <a href="index.html">
+        Dashboard
+       </a>
+      </li>
+      <li>
+       <a href="transactions.html">
+        Transactions
+       </a>
+      </li>
+      <li>
+       <a href="savings.html">
+        Savings
+       </a>
+      </li>
+      <li>
+       <a href="planning.html">
+        Planning
+       </a>
+      </li>
+      <li>
+       <a href="reports.html">
+        Reports
+       </a>
+      </li>
+      <li>
+       <a href="calendar.html">
+        Calendar
+       </a>
+      </li>
+      <li>
+       <a href="account.html">
+        Account
+       </a>
+      </li>
+     </ul>
+    </div>
+    <!-- Right Column: Logo Container -->
+    <div class="footer-logo-wrapper">
+     <img alt="SmartTracker Logo" class="footer-logo-img" src="images/footer logo.png"/>
+    </div>
+   </div>
+   <div class="footer-bottom">
+    <p>
+     © 2026 SmartTracker. All rights reserved.
+    </p>
+   </div>
+  </footer>
+  <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js">
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth-compat.js">
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js">
+  </script>
+  <script src="js/firebase-config.js">
+  </script>
+  <script src="js/firebase-init.js">
+  </script>
+  <script src="js/main.js">
+  </script>
+  <script src="js/savings.js">
+  </script>
+ </body>
+</html>

@@ -1,0 +1,254 @@
+.feature-grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:1rem
+}
+
+.metric-card {
+    background:var(--bg-color);
+    border:1px solid var(--border-color);
+    border-radius:10px;
+    padding:1rem
+}
+
+.metric-card small {
+    color:var(--text-muted);
+    display:block;
+    margin-bottom:.4rem
+}
+
+.metric-card h3 {
+    margin:0
+}
+
+.progress {
+    height:10px;
+    background:var(--border-color);
+    border-radius:999px;
+    overflow:hidden
+}
+
+.progress>span {
+    display:block;
+    height:100%;
+    background:var(--primary-color);
+    border-radius:inherit
+}
+
+.progress.warn>span {
+    background:#f59e0b
+}
+
+.progress.danger>span {
+    background:var(--danger)
+}
+
+.feature-table {
+    width:100%;
+    border-collapse:collapse
+}
+
+.feature-table th,.feature-table td {
+    padding:.75rem;
+    border-bottom:1px solid var(--border-color);
+    text-align:left;
+    vertical-align:top
+}
+
+.badge {
+    display:inline-flex;
+    align-items:center;
+    padding:.22rem .55rem;
+    border-radius:999px;
+    font-size:.78rem;
+    font-weight:700;
+    background:rgba(var(--primary-rgb),.12);
+    color:var(--primary-color)
+}
+
+.badge.success {
+    background:rgba(16,185,129,.12);
+    color:var(--success)
+}
+
+.badge.warn {
+    background:rgba(245,158,11,.15);
+    color:#d97706
+}
+
+.badge.danger {
+    background:rgba(239,68,68,.12);
+    color:var(--danger)
+}
+
+.feature-actions {
+    display:flex;
+    gap:.5rem;
+    flex-wrap:wrap
+}
+
+.btn-small {
+    padding:.42rem .65rem;
+    font-size:.82rem
+}
+
+.btn-danger {
+    background:var(--danger)!important
+}
+
+.btn-secondary {
+    background:var(--bg-color)!important;
+    color:var(--text-color)!important;
+    border:1px solid var(--border-color)!important
+}
+
+.section-note {
+    color:var(--text-muted);
+    margin:.35rem 0 1rem;
+    line-height:1.5
+}
+
+.inline-form {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:.75rem;
+    align-items:end
+}
+
+.empty-state {
+    color:var(--text-muted);
+    padding:1rem 0
+}
+
+.sync-badge {
+    position:fixed;
+    right:16px;
+    bottom:16px;
+    z-index:999;
+    padding:.55rem .8rem;
+    border-radius:999px;
+    background:var(--card-bg);
+    border:1px solid var(--border-color);
+    box-shadow:0 4px 16px rgba(0,0,0,.12);
+    font-size:.82rem
+}
+
+.insight-list {
+    margin:.7rem 0 0 1.2rem;
+    color:var(--text-muted);
+    line-height:1.7
+}
+
+.chart-grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:1rem
+}
+
+.chart-box {
+    min-height:280px
+}
+
+.filter-grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+    gap:.7rem;
+    margin:.8rem 0 1rem
+}
+
+.wallet-flex {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:1rem
+}
+
+.wallet-mini {
+    border:1px solid var(--border-color);
+    border-radius:10px;
+    padding:1rem;
+    background:var(--bg-color)
+}
+
+.subnav {
+    display:flex;
+    gap:.5rem;
+    flex-wrap:wrap;
+    margin-bottom:1rem
+}
+
+.subnav a {
+    padding:.5rem .8rem;
+    border-radius:8px;
+    background:var(--bg-color);
+    color:var(--text-color);
+    text-decoration:none;
+    border:1px solid var(--border-color)
+}
+
+.form-check {
+    display:flex;
+    align-items:center;
+    gap:.5rem
+}
+
+.form-check input {
+    width:auto
+}
+
+.comparison-good {
+    color:var(--success)
+}
+
+.comparison-bad {
+    color:var(--danger)
+}
+
+@media(max-width:700px) {
+    .feature-table {
+        display:block;
+        overflow-x:auto
+    }
+    .chart-grid {
+        grid-template-columns:1fr
+    }
+}
+
+.plan-row {
+    border:1px solid var(--border-color);
+    border-radius:10px;
+    padding:1rem;
+    margin:.7rem 0;
+    background:var(--bg-color)
+}
+
+.plan-row-head {
+    display:flex;
+    justify-content:space-between;
+    gap:1rem;
+    align-items:flex-start;
+    flex-wrap:wrap
+}
+
+.muted {
+    color:var(--text-muted)
+}
+/* Keep submit buttons aligned with the input/select row on Planning forms. */
+
+.inline-form .form-action {
+    display:flex;
+    align-items:flex-end;
+    align-self:end;
+    min-width:0
+}
+
+.inline-form .form-action button {
+    width:100%;
+    min-height:59px;
+    margin:0
+}
+
+@media(max-width:700px) {
+    .inline-form .form-action button {
+        min-height:52px
+    }
+}

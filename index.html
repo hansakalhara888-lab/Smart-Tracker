@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <link href="manifest.json" rel="manifest"/>
+  <link href="icons/apple-touch-icon.png" rel="apple-touch-icon"/>
+  <meta content="#4f46e5" name="theme-color"/>
+  <meta content="yes" name="mobile-web-app-capable"/>
+  <meta content="yes" name="apple-mobile-web-app-capable"/>
+  <meta content="SmartTracker" name="apple-mobile-web-app-title"/>
+  <title>
+   Dashboard - Money Tracker
+  </title>
+  <link href="css/main.css" rel="stylesheet"/>
+  <link href="css/dashboard.css" rel="stylesheet"/>
+  <link href="css/features.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div aria-hidden="true" id="app-loading-bar">
+  </div>
+  <header class="app-header">
+   <div class="nav-container">
+    <a class="brand-logo" href="index.html">
+     <img alt="SmartTracker Logo" class="brand-logo-img" src="images/logo 2.png"/>
+    </a>
+    <nav class="nav-links" id="nav-links">
+     <a class="nav-link active" href="index.html">
+      Dashboard
+     </a>
+     <a class="nav-link" href="transactions.html">
+      Transactions
+     </a>
+     <a class="nav-link" href="savings.html">
+      Savings Target
+     </a>
+     <a class="nav-link" href="planning.html">
+      Planning
+     </a>
+     <a class="nav-link" href="reports.html">
+      Reports
+     </a>
+     <a class="nav-link" href="calendar.html">
+      Calendar
+     </a>
+     <a class="nav-link" href="account.html">
+      Account
+     </a>
+     <button class="mobile-menu-logout" type="button">
+      Logout
+     </button>
+    </nav>
+    <div class="nav-actions">
+     <button aria-label="Toggle theme" class="btn-theme" id="theme-toggle" type="button">
+      🌙
+     </button>
+     <button class="btn-logout" id="logout-btn" type="button">
+      Logout
+     </button>
+     <button aria-expanded="false" aria-label="Open menu" class="hamburger-btn" id="hamburger-btn" type="button">
+      <span>
+      </span>
+      <span>
+      </span>
+      <span>
+      </span>
+     </button>
+    </div>
+   </div>
+  </header>
+  <main>
+   <section aria-live="polite" class="dashboard-welcome" id="dashboard-welcome">
+    <div>
+     <p class="dashboard-welcome-kicker" id="dashboard-welcome-greeting">
+      Welcome back!
+     </p>
+     <h1 class="dashboard-welcome-name" id="dashboard-welcome-name">
+      SmartTracker
+     </h1>
+     <p class="dashboard-welcome-text">
+      Here is your financial overview for today.
+     </p>
+    </div>
+    <button class="dashboard-customize-btn" id="dashboard-customize-btn" type="button">
+     ⚙ Customize Dashboard
+    </button>
+   </section>
+   <section class="card index-style-1" data-dashboard-section="summary">
+    <div class="index-style-2">
+     <div class="index-style-3" data-dashboard-card="balance">
+      <small class="index-style-4">
+       Current Balance
+      </small>
+      <h3 id="total-balance">
+       Rs. 0.00
+      </h3>
+     </div>
+     <div class="index-style-3" data-dashboard-card="opening">
+      <small class="index-style-4">
+       Month Opening Balance
+      </small>
+      <h3 id="opening-balance">
+       Rs. 0.00
+      </h3>
+     </div>
+     <div class="index-style-3" data-dashboard-card="income">
+      <small class="index-style-4">
+       This Month Income
+      </small>
+      <h3 id="total-income">
+       Rs. 0.00
+      </h3>
+     </div>
+     <div class="index-style-3" data-dashboard-card="expenses">
+      <small class="index-style-4">
+       This Month Expenses
+      </small>
+      <h3 id="total-expense">
+       Rs. 0.00
+      </h3>
+     </div>
+     <div class="index-style-3" data-dashboard-card="savings">
+      <small class="index-style-4">
+       This Month Savings
+      </small>
+      <h3 id="total-savings">
+       Rs. 0.00
+      </h3>
+     </div>
+    </div>
+   </section>
+   <section class="card index-style-1" data-dashboard-section="wallets">
+    <h2 class="index-style-5">
+     Wallets
+    </h2>
+    <p class="index-style-6">
+     Cash + Bank + Card always equals your overall
+     <strong>
+      Balance
+     </strong>
+     . Transfers only move money between wallets.
+    </p>
+    <div class="index-style-2">
+     <div class="wallet-card index-style-7">
+      <small class="index-style-4">
+       💵 Cash
+      </small>
+      <h3 id="wallet-cash">
+       Rs. 0.00
+      </h3>
+     </div>
+     <div class="wallet-card index-style-7">
+      <small class="index-style-4">
+       🏦 Bank
+      </small>
+      <h3 id="wallet-bank">
+       Rs. 0.00
+      </h3>
+     </div>
+     <div class="wallet-card index-style-7">
+      <small class="index-style-4">
+       💳 Card
+      </small>
+      <h3 id="wallet-card">
+       Rs. 0.00
+      </h3>
+     </div>
+    </div>
+    <div class="wallet-flex" id="custom-wallet-cards">
+    </div>
+    <p id="wallet-sum-check">
+    </p>
+   </section>
+   <section class="card" data-dashboard-section="health">
+    <h2>
+     Financial Health
+    </h2>
+    <div class="feature-grid">
+     <div class="metric-card">
+      <small>
+       Financial Score
+      </small>
+      <h3 id="financial-score">
+       --/100
+      </h3>
+      <span class="badge" id="financial-label">
+      </span>
+     </div>
+     <div class="metric-card">
+      <small>
+       This Month Cash Change
+      </small>
+      <h3 id="month-net">
+       Rs. 0.00
+      </h3>
+     </div>
+    </div>
+    <ul class="insight-list" id="financial-insights">
+    </ul>
+   </section>
+   <section class="card" data-dashboard-section="charts">
+    <h2>
+     Dashboard Charts
+    </h2>
+    <div class="chart-grid">
+     <div class="chart-box" data-dashboard-chart="incomeExpense">
+      <canvas id="dash-income-expense-chart">
+      </canvas>
+     </div>
+     <div class="chart-box" data-dashboard-chart="category">
+      <canvas id="dash-category-chart">
+      </canvas>
+     </div>
+     <div class="chart-box" data-dashboard-chart="wallets">
+      <canvas id="dash-wallet-chart">
+      </canvas>
+     </div>
+     <div class="chart-box" data-dashboard-chart="balance">
+      <canvas id="dash-balance-chart">
+      </canvas>
+     </div>
+     <div class="chart-box" data-dashboard-chart="savings">
+      <canvas id="dash-savings-chart">
+      </canvas>
+     </div>
+    </div>
+   </section>
+  </main>
+  <div aria-hidden="true" class="dashboard-customize-modal" id="dashboard-customize-modal">
+   <div class="dashboard-customize-panel" role="dialog" aria-modal="true" aria-labelledby="dashboard-customize-title">
+    <div class="dashboard-customize-head">
+     <div>
+      <h2 id="dashboard-customize-title">Customize Dashboard</h2>
+      <p>Choose what appears on your Dashboard. Your choices sync with your account.</p>
+     </div>
+     <button aria-label="Close" class="dashboard-customize-close" id="dashboard-customize-close" type="button">×</button>
+    </div>
+    <div class="dashboard-option-group">
+     <h3>Summary cards</h3>
+     <div class="dashboard-option-grid">
+      <label><input data-pref-card="balance" type="checkbox"/> Current Balance</label>
+      <label><input data-pref-card="opening" type="checkbox"/> Opening Balance</label>
+      <label><input data-pref-card="income" type="checkbox"/> Income</label>
+      <label><input data-pref-card="expenses" type="checkbox"/> Expenses</label>
+      <label><input data-pref-card="savings" type="checkbox"/> Savings</label>
+     </div>
+    </div>
+    <div class="dashboard-option-group">
+     <h3>Sections</h3>
+     <div class="dashboard-option-grid">
+      <label><input data-pref-section="wallets" type="checkbox"/> Wallets</label>
+      <label><input data-pref-section="health" type="checkbox"/> Financial Health</label>
+     </div>
+    </div>
+    <div class="dashboard-option-group">
+     <h3>Charts</h3>
+     <div class="dashboard-option-grid">
+      <label><input data-pref-chart="incomeExpense" type="checkbox"/> Income / Expense / Savings</label>
+      <label><input data-pref-chart="category" type="checkbox"/> Spending by Category</label>
+      <label><input data-pref-chart="wallets" type="checkbox"/> Wallet Distribution</label>
+      <label><input data-pref-chart="balance" type="checkbox"/> Balance Trend</label>
+      <label><input data-pref-chart="savings" type="checkbox"/> Savings Progress</label>
+     </div>
+    </div>
+    <div class="dashboard-customize-actions">
+     <button class="btn-secondary" id="dashboard-customize-reset" type="button">Reset defaults</button>
+     <button id="dashboard-customize-save" type="button">Save Dashboard</button>
+    </div>
+   </div>
+  </div>
+  <footer class="app-footer">
+   <div class="footer-container">
+    <!-- Left Column: Brand Info -->
+    <div class="footer-brand">
+     <h1>
+      SmartTracker
+     </h1>
+     <p>
+      Empowering your financial journey with
+      <br/>
+      modern tracking and actionable insights.
+     </p>
+    </div>
+    <!-- Center Column: Quick Links -->
+    <div class="footer-links">
+     <h3>
+      Quick Links
+     </h3>
+     <ul>
+      <li>
+       <a href="index.html">
+        Dashboard
+       </a>
+      </li>
+      <li>
+       <a href="transactions.html">
+        Transactions
+       </a>
+      </li>
+      <li>
+       <a href="savings.html">
+        Savings
+       </a>
+      </li>
+      <li>
+       <a href="planning.html">
+        Planning
+       </a>
+      </li>
+      <li>
+       <a href="reports.html">
+        Reports
+       </a>
+      </li>
+      <li>
+       <a href="calendar.html">
+        Calendar
+       </a>
+      </li>
+      <li>
+       <a href="account.html">
+        Account
+       </a>
+      </li>
+     </ul>
+    </div>
+    <!-- Right Column: Logo Container -->
+    <div class="footer-logo-wrapper">
+     <img alt="SmartTracker Logo" class="footer-logo-img" src="images/footer logo.png"/>
+    </div>
+   </div>
+   <div class="footer-bottom">
+    <p>
+     © 2026 SmartTracker. All rights reserved.
+    </p>
+   </div>
+  </footer>
+  <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js">
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth-compat.js">
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js">
+  </script>
+  <script src="js/firebase-config.js">
+  </script>
+  <script src="js/firebase-init.js">
+  </script>
+  <script src="js/main.js">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js">
+  </script>
+  <script src="js/dashboard.js">
+  </script>
+ </body>
+</html>

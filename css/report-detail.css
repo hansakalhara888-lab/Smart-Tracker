@@ -1,0 +1,250 @@
+/* Styles moved out of inline HTML for this page. */
+
+#chart-empty {
+    display:none;
+}
+
+.report_detail-style-1 {
+    color:var(--text-muted);
+}
+/* Page-specific styles moved from the original main.css. */
+/* ==================== REPORT DETAIL ==================== */
+
+.detail-top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.back-link {
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+.report-hero h1 {
+    margin: 0.15rem 0 0.35rem;
+    font-size: 1.6rem;
+}
+
+.report-kicker {
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 0;
+}
+
+.report-meta {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin: 0 0 1.25rem;
+}
+
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.75rem;
+}
+
+.stat-card {
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+.stat-card small {
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: 0.35rem;
+}
+
+.stat-card h3 {
+    margin: 0;
+    font-size: 1.15rem;
+}
+
+.stat-card.income h3 {
+    color: var(--success);
+}
+
+.stat-card.expense h3 {
+    color: var(--danger);
+}
+
+.stat-card.savings h3 {
+    color: var(--primary-color);
+}
+
+.stat-card.count h3 {
+    color: var(--primary-color);
+}
+
+.section-head h2 {
+    margin: 0 0 0.2rem;
+    font-size: 1.2rem;
+}
+
+.section-sub {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin: 0 0 1rem;
+}
+
+.section-head.row-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.5rem;
+}
+
+.breakdown-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.chart-wrap {
+    max-width: 280px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.cat-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+.cat-table th, .cat-table td {
+    text-align: left;
+    padding: 0.65rem 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.cat-table th {
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.cat-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 0.45rem;
+    vertical-align: middle;
+}
+
+.filter-pills {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+}
+
+.pill {
+    background: var(--bg-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 999px;
+    padding: 0.35rem 0.85rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.pill.active {
+    background: var(--primary-color);
+    color: #fff;
+    border-color: var(--primary-color);
+}
+
+.detail-tx-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.tx-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--border-color);
+    flex-wrap: wrap;
+}
+
+.tx-title {
+    font-weight: 600;
+}
+
+.tx-sub {
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+    margin-top: 0.25rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    flex-wrap: wrap;
+}
+
+.tx-badge {
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 0.1rem 0.45rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.tx-amount {
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.tx-empty, .empty-hint {
+    color: var(--text-muted);
+    padding: 1rem 0;
+    list-style: none;
+}
+
+@media (max-width: 1100px) {
+    .stat-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .stat-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    .breakdown-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media print {
+    .app-header,   .app-footer,   .detail-top-bar,   .filter-pills,   .hamburger-btn,   .nav-actions {
+        display: none !important;
+    }
+    body {
+        background: #fff !important;
+    }
+    .card {
+        box-shadow: none;
+        border: 1px solid #ddd;
+        break-inside: avoid;
+    }
+}

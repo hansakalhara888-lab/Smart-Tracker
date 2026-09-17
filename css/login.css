@@ -1,0 +1,350 @@
+/* Styles moved out of inline HTML for this page. */
+
+.login-style-1 {
+    max-width: 420px;
+    width: 100%;
+    margin: 2rem auto;
+    padding: 2rem;
+    border-radius: 10px;
+}
+
+.login-style-2 {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+#register-form {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.login-style-3 {
+    display: block;
+    margin-bottom: 0.2rem;
+    font-size: 0.85rem;
+}
+
+#reg-username {
+    width: 100%;
+    padding: 0.6rem;
+    border-radius: 6px;
+}
+
+#reg-fullname {
+    width: 100%;
+    padding: 0.6rem;
+    border-radius: 6px;
+}
+
+#reg-email {
+    width: 100%;
+    padding: 0.6rem;
+    border-radius: 6px;
+}
+
+#reg-password {
+    width: 100%;
+    padding: 0.6rem;
+    border-radius: 6px;
+}
+
+#reg-confirm-password {
+    width: 100%;
+    padding: 0.6rem;
+    border-radius: 6px;
+}
+
+#register-error {
+    color: var(--danger);
+    font-size: 0.85rem;
+    display: none;
+}
+
+.login-style-4 {
+    padding: 0.75rem;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 0.5rem;
+}
+
+.login-style-5 {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    text-align: center;
+    color: var(--text-muted);
+}
+
+#to-login-btn {
+    color: var(--primary);
+    font-weight: bold;
+}
+
+#login-box {
+    display: none;
+}
+
+#login-form {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+#login-email {
+    width: 100%;
+    padding: 0.6rem;
+    border-radius: 6px;
+}
+
+#login-password {
+    width: 100%;
+    padding: 0.6rem;
+    border-radius: 6px;
+}
+
+#login-error {
+    color: var(--danger);
+    font-size: 0.85rem;
+    display: none;
+}
+
+.login-style-6 {
+    margin-top: 0.8rem;
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+#forgot-password-btn {
+    color: var(--primary);
+    font-weight: bold;
+}
+
+#auth-status {
+    display: none;
+    margin-top: 0.8rem;
+    padding: 0.7rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+}
+
+#resend-verification-btn {
+    display: none;
+    width: 100%;
+    padding: 0.65rem;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 0.6rem;
+}
+
+#to-register-btn {
+    color: var(--primary);
+    font-weight: bold;
+}
+/* Page-specific styles moved from the original main.css. */
+/* ==================== LOGIN PAGE HERO BACKGROUND ==================== */
+
+.login-container {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 2rem 1rem;
+    box-sizing: border-box;
+    background-image:     radial-gradient(circle at 18% 20%, rgba(var(--primary-rgb), 0.35), transparent 45%),     radial-gradient(circle at 82% 8%, rgba(16, 185, 129, 0.22), transparent 42%),     radial-gradient(circle at 50% 100%, rgba(239, 68, 68, 0.14), transparent 45%),     var(--bg-color);
+}
+/* Fine dot-grid texture layered on top of the gradient wash for polish */
+
+.login-container::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(var(--primary-rgb), 0.35) 1px, transparent 1px);
+    background-size: 26px 26px;
+    -webkit-mask-image: radial-gradient(circle at 50% 30%, black, transparent 75%);
+    mask-image: radial-gradient(circle at 50% 30%, black, transparent 75%);
+    opacity: 0.35;
+    pointer-events: none;
+}
+
+.login-card {
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 20px 45px -15px rgba(0, 0, 0, 0.25);
+    border: 1px solid var(--border-color);
+}
+/* ---- Login hero: logo, name, tagline above the card ---- */
+
+.login-brand {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.login-brand-logo {
+    height: 84px;
+    width: auto;
+    object-fit: contain;
+    border-radius: 1rem;
+    padding: 0.6rem;
+    background: var(--card-bg);
+    box-shadow: 0 12px 30px -10px rgba(var(--primary-rgb), 0.45);
+    margin-bottom: 1rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .login-brand-logo {
+        animation: login-logo-float 4s ease-in-out infinite;
+    }
+}
+
+@keyframes login-logo-float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-6px);
+    }
+}
+
+.login-brand-name {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--text-color);
+    margin: 0 0 0.4rem;
+    letter-spacing: -0.01em;
+}
+
+.login-brand-name span {
+    color: var(--primary-color);
+}
+
+.login-brand-tagline {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    max-width: 320px;
+    margin: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .login-card {
+        animation: login-card-in 0.5s ease both;
+    }
+}
+
+@keyframes login-card-in {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* Login time-based greeting */
+
+.login-greeting {
+    margin-top: 0.75rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--primary-color, #4f46e5);
+    min-height: 1.4em;
+}
+
+.login-card {
+    max-width: 440px;
+    width: 100%;
+    margin: 2rem auto;
+    padding: 2rem;
+    border-radius: 10px;
+}
+
+#register-form, #login-form {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: .8rem;
+}
+
+.form-field label {
+    display:block;
+    margin-bottom:.25rem;
+    font-size:.85rem;
+}
+
+.form-field input, .form-field select {
+    width:100%;
+    padding:.65rem;
+    border-radius:6px;
+}
+
+.birthday-grid {
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:.7rem;
+}
+
+.birthday-age-field {
+    grid-column: span 1;
+}
+
+#reg-birth-year[readonly] {
+    opacity:.85;
+    cursor:not-allowed;
+}
+
+.auth-divider {
+    display:flex;
+    align-items:center;
+    gap:.75rem;
+    margin:1rem 0;
+    color:var(--text-muted);
+    font-size:.8rem;
+}
+
+.auth-divider::before,.auth-divider::after {
+    content:'';
+    flex:1;
+    height:1px;
+    background:var(--border-color);
+}
+
+.google-auth-btn {
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:.65rem;
+    padding:.7rem;
+    background:var(--card-bg);
+    color:var(--text-color);
+    border:1px solid var(--border-color);
+    border-radius:7px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+.google-auth-btn:hover {
+    border-color:var(--primary-color);
+}
+
+.google-g {
+    font-weight:800;
+    font-size:1.05rem;
+}
+
+@media (max-width:520px) {
+    .birthday-grid {
+        grid-template-columns:1fr;
+    }
+}

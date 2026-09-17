@@ -1,0 +1,297 @@
+
+/* Personalized welcome shown every time the Dashboard opens. */
+.dashboard-welcome {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding: 1.25rem 1.4rem;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(var(--primary-rgb), 0.12), rgba(16, 185, 129, 0.08)), var(--card-bg);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+}
+
+.dashboard-welcome-kicker {
+    color: var(--primary-color);
+    font-weight: 700;
+    margin: 0 0 0.2rem;
+}
+
+.dashboard-welcome-name {
+    color: var(--text-color);
+    font-size: clamp(1.35rem, 3vw, 1.9rem);
+    line-height: 1.2;
+    margin: 0;
+}
+
+.dashboard-welcome-text {
+    color: var(--text-muted);
+    margin: 0.45rem 0 0;
+}
+
+@media (max-width: 600px) {
+    .dashboard-welcome {
+        padding: 1rem;
+    }
+}
+
+/* Styles moved out of inline HTML for this page. */
+
+.index-style-1 {
+    margin-bottom:1rem;
+}
+
+.index-style-2 {
+    display:flex;
+    gap:1rem;
+    flex-wrap:wrap;
+}
+
+.index-style-3 {
+    flex:1;
+    min-width:140px;
+    background:var(--bg-color);
+    padding:1rem;
+    border-radius:8px;
+    border:1px solid var(--border-color);
+}
+
+.index-style-4 {
+    color:var(--text-muted);
+}
+
+#total-balance {
+    color:var(--primary-color);
+    margin-top:0.25rem;
+}
+
+#total-income {
+    color:var(--success);
+    margin-top:0.25rem;
+}
+
+#total-expense {
+    color:var(--danger);
+    margin-top:0.25rem;
+}
+
+#total-savings {
+    color: var(--primary-color);
+    margin-top: 0.25rem;
+}
+
+.index-style-5 {
+    margin-bottom:0.35rem;
+}
+
+.index-style-6 {
+    font-size:0.85rem;
+    color:var(--text-muted);
+    margin-bottom:0.75rem;
+}
+
+.index-style-7 {
+    flex:1;
+    min-width:120px;
+    background:var(--bg-color);
+    padding:1rem;
+    border-radius:8px;
+    border:1px solid var(--border-color);
+}
+
+#wallet-cash {
+    margin-top:0.25rem;
+}
+
+#wallet-bank {
+    margin-top:0.25rem;
+}
+
+#wallet-card {
+    margin-top:0.25rem;
+}
+
+#wallet-sum-check {
+    font-size:0.85rem;
+    color:var(--text-muted);
+    margin-top:0.75rem;
+}
+
+#bill-monthly-box {
+    display:none;
+}
+
+.index-style-8 {
+    display:flex;
+    gap:0.5rem;
+    flex-wrap:wrap;
+}
+
+#tx-cancel-edit {
+    display:none;
+}
+
+.index-style-9 {
+    font-size:0.9rem;
+    color:var(--text-muted);
+    margin-bottom:0.75rem;
+}
+
+#transaction-list {
+    list-style: none;
+    margin-top: 1rem;
+}
+
+#tx-pagination {
+    display:none;
+    margin-top:1rem;
+    align-items:center;
+    justify-content:space-between;
+    gap:0.75rem;
+    flex-wrap:wrap;
+}
+
+#tx-page-prev {
+    padding:0.45rem 0.9rem;
+}
+
+#tx-page-info {
+    font-size:0.9rem;
+    color:var(--text-muted);
+}
+
+#tx-page-next {
+    padding:0.45rem 0.9rem;
+}
+/* Page-specific styles moved from the original main.css. */
+/* Locked category when Type = Income */
+
+#category:disabled {
+    opacity: 0.85;
+    cursor: not-allowed;
+    background-color: var(--bg-color);
+    color: var(--text-muted);
+}
+/* ==================== BILL MONTHLY PROMPT ==================== */
+
+.bill-monthly-box {
+    background: var(--bg-color);
+    border: 1px dashed var(--primary-color);
+    border-radius: 8px;
+    padding: 0.9rem 1rem;
+    margin-bottom: 1rem;
+}
+
+.bill-monthly-q {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.bill-monthly-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.bill-monthly-options label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    cursor: pointer;
+}
+/* ==================== CUSTOM CATEGORIES ==================== */
+
+.custom-cat-row {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin-top: 0.45rem;
+    flex-wrap: wrap;
+}
+
+.custom-cat-row input {
+    flex: 1;
+    min-width: 140px;
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background: var(--input-bg, var(--card-bg));
+    color: var(--text-color);
+    font-size: 0.9rem;
+}
+
+.btn-add-cat {
+    background: var(--bg-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    padding: 0.5rem 0.85rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.85rem;
+    white-space: nowrap;
+}
+
+.btn-add-cat:hover {
+    border-color: var(--primary-color, #4f46e5);
+    color: var(--primary-color, #4f46e5);
+}
+
+.custom-cat-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.55rem;
+}
+
+.cat-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 999px;
+    padding: 0.2rem 0.55rem 0.2rem 0.7rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.cat-chip button {
+    background: transparent;
+    border: none;
+    color: var(--danger, #ef4444);
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1;
+    padding: 0 0.15rem;
+    font-weight: 700;
+}
+
+.custom-cat-hint {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 0.35rem;
+}
+/* The Dashboard shows only the current month's transactions and totals.
+   Wallet balances still use the complete saved transaction history. */
+
+
+/* Dashboard customization */
+.dashboard-customize-btn { flex:0 0 auto; background:var(--bg-color); color:var(--text-color); border:1px solid var(--border-color); }
+.dashboard-customize-modal { position:fixed; inset:0; z-index:10000; display:none; align-items:center; justify-content:center; padding:1rem; background:rgba(15,23,42,0.62); backdrop-filter:blur(4px); }
+.dashboard-customize-modal.open { display:flex; }
+.dashboard-customize-panel { width:min(720px,100%); max-height:90vh; overflow:auto; background:var(--card-bg); border:1px solid var(--border-color); border-radius:14px; padding:1.25rem; box-shadow:0 24px 70px rgba(0,0,0,0.28); }
+.dashboard-customize-head { display:flex; justify-content:space-between; align-items:flex-start; gap:1rem; }
+.dashboard-customize-head p { color:var(--text-muted); margin-top:0.25rem; }
+.dashboard-customize-close { background:transparent; color:var(--text-color); border:1px solid var(--border-color); width:38px; height:38px; padding:0; font-size:1.35rem; }
+.dashboard-option-group { margin-top:1.1rem; }
+.dashboard-option-group h3 { margin-bottom:0.55rem; }
+.dashboard-option-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0.55rem; }
+.dashboard-option-grid label { display:flex; align-items:center; gap:0.55rem; padding:0.65rem 0.75rem; background:var(--bg-color); border:1px solid var(--border-color); border-radius:8px; cursor:pointer; }
+.dashboard-option-grid input { width:auto; }
+.dashboard-customize-actions { margin-top:1.25rem; display:flex; justify-content:flex-end; gap:0.6rem; flex-wrap:wrap; }
+@media (max-width:600px) { .dashboard-welcome { align-items:flex-start; flex-direction:column; } .dashboard-customize-btn { width:100%; } .dashboard-option-grid { grid-template-columns:1fr; } }

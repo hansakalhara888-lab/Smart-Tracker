@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <link href="manifest.json" rel="manifest"/>
+  <link href="icons/apple-touch-icon.png" rel="apple-touch-icon"/>
+  <meta content="#4f46e5" name="theme-color"/>
+  <meta content="yes" name="mobile-web-app-capable"/>
+  <meta content="yes" name="apple-mobile-web-app-capable"/>
+  <meta content="SmartTracker" name="apple-mobile-web-app-title"/>
+  <title>
+   Transactions - SmartTracker
+  </title>
+  <link href="css/main.css" rel="stylesheet"/>
+  <link href="css/transactions.css" rel="stylesheet"/>
+  <link href="css/features.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div aria-hidden="true" id="app-loading-bar">
+  </div>
+  <header class="app-header">
+   <div class="nav-container">
+    <a class="brand-logo" href="index.html">
+     <img alt="SmartTracker Logo" class="brand-logo-img" src="images/logo 2.png"/>
+    </a>
+    <nav class="nav-links" id="nav-links">
+     <a class="nav-link" href="index.html">
+      Dashboard
+     </a>
+     <a class="nav-link active" href="transactions.html">
+      Transactions
+     </a>
+     <a class="nav-link" href="savings.html">
+      Savings Target
+     </a>
+     <a class="nav-link" href="planning.html">
+      Planning
+     </a>
+     <a class="nav-link" href="reports.html">
+      Reports
+     </a>
+     <a class="nav-link" href="calendar.html">
+      Calendar
+     </a>
+     <a class="nav-link" href="account.html">
+      Account
+     </a>
+     <button class="mobile-menu-logout" type="button">
+      Logout
+     </button>
+    </nav>
+    <div class="nav-actions">
+     <button aria-label="Toggle theme" class="btn-theme" id="theme-toggle" type="button">
+      🌙
+     </button>
+     <button class="btn-logout" id="logout-btn" type="button">
+      Logout
+     </button>
+     <button aria-expanded="false" aria-label="Open menu" class="hamburger-btn" id="hamburger-btn" type="button">
+      <span>
+      </span>
+      <span>
+      </span>
+      <span>
+      </span>
+     </button>
+    </div>
+   </div>
+  </header>
+  <main>
+   <section class="card">
+    <h1>
+     Transactions
+    </h1>
+    <p class="section-note">
+     Record income and expenses, transfer money between wallets, and manage this month’s transaction history.
+    </p>
+   </section>
+   <section class="card">
+    <h2 id="tx-form-title">
+     Add Transaction
+    </h2>
+    <form id="transaction-form">
+     <input id="editing-tx-id" type="hidden" value=""/>
+     <div class="form-group">
+      <label for="type">
+       Type
+      </label>
+      <select id="type" required="">
+       <option value="expense">
+        Expense
+       </option>
+       <option value="income">
+        Income
+       </option>
+      </select>
+     </div>
+     <div class="form-group">
+      <label for="account">
+       Wallet / Account
+      </label>
+      <select id="account" required="">
+       <option value="Cash">
+        Cash
+       </option>
+       <option value="Bank">
+        Bank
+       </option>
+       <option value="Card">
+        Card
+       </option>
+      </select>
+     </div>
+     <div class="form-group">
+      <label for="category">
+       Category
+      </label>
+      <select id="category" required="">
+       <option value="Food">
+        Food
+       </option>
+       <option value="Transport">
+        Transport
+       </option>
+       <option value="Bills">
+        Bills
+       </option>
+       <option value="Shopping">
+        Shopping
+       </option>
+       <option value="Savings Deposit">
+        Savings Deposit
+       </option>
+       <option value="Other">
+        Other
+       </option>
+      </select>
+      <div id="custom-cat-panel">
+       <div class="custom-cat-row">
+        <input autocomplete="off" id="new-category-input" maxlength="40" placeholder="Add custom category…" type="text"/>
+        <button class="btn-add-cat" id="add-category-btn" type="button">
+         + Add
+        </button>
+       </div>
+       <p class="custom-cat-hint">
+        Built-in categories stay. Your custom ones appear in the list above.
+       </p>
+       <div class="custom-cat-chips" id="custom-cat-chips">
+       </div>
+      </div>
+     </div>
+     <div class="bill-monthly-box" id="bill-monthly-box">
+      <p class="bill-monthly-q">
+       Are you paying this every month?
+      </p>
+      <div class="bill-monthly-options">
+       <label>
+        <input id="bill-monthly-yes" name="bill-monthly" type="radio" value="yes"/>
+        Yes — also add this bill to Calendar
+       </label>
+       <label>
+        <input checked="" id="bill-monthly-no" name="bill-monthly" type="radio" value="no"/>
+        No — expense only (no calendar)
+       </label>
+      </div>
+     </div>
+     <div class="form-group">
+      <label for="amount">
+       Amount
+      </label>
+      <input autocomplete="off" id="amount" inputmode="decimal" placeholder="e.g., 1,500.00" required="" type="text"/>
+     </div>
+     <div class="form-group">
+      <label for="description">
+       Description
+      </label>
+      <input id="description" placeholder="e.g., Grocery shopping" required="" type="text"/>
+     </div>
+     <div class="index-style-8">
+      <button id="tx-submit-btn" type="submit">
+       Record Transaction
+      </button>
+      <button class="btn-secondary" id="tx-cancel-edit" type="button">
+       Cancel edit
+      </button>
+     </div>
+    </form>
+   </section>
+   <section class="card">
+    <h2>
+     Transfer between wallets
+    </h2>
+    <p class="index-style-9">
+     Move money between Cash, Bank, and Card. This does not change total income or expenses. You cannot transfer or spend more than a wallet currently has.
+    </p>
+    <form id="transfer-form">
+     <div class="form-row">
+      <div class="form-group">
+       <label for="transfer-from">
+        From
+       </label>
+       <select id="transfer-from" required="">
+        <option value="Cash">
+         Cash
+        </option>
+        <option value="Bank">
+         Bank
+        </option>
+        <option value="Card">
+         Card
+        </option>
+       </select>
+      </div>
+      <div class="form-group">
+       <label for="transfer-to">
+        To
+       </label>
+       <select id="transfer-to" required="">
+        <option value="Bank">
+         Bank
+        </option>
+        <option value="Cash">
+         Cash
+        </option>
+        <option value="Card">
+         Card
+        </option>
+       </select>
+      </div>
+     </div>
+     <div class="form-group">
+      <label for="transfer-amount">
+       Amount
+      </label>
+      <input autocomplete="off" id="transfer-amount" inputmode="decimal" placeholder="e.g., 5,000.00" required="" type="text"/>
+     </div>
+     <div class="form-group">
+      <label for="transfer-note">
+       Note (optional)
+      </label>
+      <input id="transfer-note" placeholder="e.g., ATM withdrawal" type="text"/>
+     </div>
+     <button type="submit">
+      Transfer
+     </button>
+    </form>
+   </section>
+   <section class="card bank-import-card">
+    <h2>Import Bank CSV</h2>
+    <p class="section-note">Upload a CSV bank statement and preview it before importing. SmartTracker understands common Date, Description, Amount, Debit, Credit, Type, Category and Account/Wallet columns.</p>
+    <div class="bank-import-controls">
+     <input accept=".csv,text/csv" id="bank-csv-file" type="file"/>
+     <button class="btn-secondary" disabled="" id="bank-csv-import" type="button">Import valid rows</button>
+    </div>
+    <p class="bank-import-hint">If the CSV has one Amount column: positive values are treated as income and negative values as expenses unless a Type column says otherwise. Missing wallet values default to Bank.</p>
+    <div aria-live="polite" class="bank-import-status" id="bank-csv-status"></div>
+    <div class="bank-csv-preview-wrap" id="bank-csv-preview-wrap" hidden="">
+     <table class="bank-csv-preview">
+      <thead><tr><th>Date</th><th>Type</th><th>Description</th><th>Category</th><th>Wallet</th><th>Amount</th></tr></thead>
+      <tbody id="bank-csv-preview-body"></tbody>
+     </table>
+    </div>
+   </section>
+   <section class="card">
+    <h2>
+     This Month Transactions
+    </h2>
+    <div class="filter-grid">
+     <input id="tx-search" placeholder="Search description/category"/>
+     <select id="tx-filter-type">
+      <option value="">
+       All types
+      </option>
+      <option value="income">
+       Income
+      </option>
+      <option value="expense">
+       Expense
+      </option>
+      <option value="transfer">
+       Transfer
+      </option>
+     </select>
+     <select id="tx-filter-wallet">
+      <option value="">
+       All wallets
+      </option>
+     </select>
+     <input id="tx-filter-category" placeholder="Category"/>
+     <input id="tx-filter-from" type="date"/>
+     <input id="tx-filter-to" type="date"/>
+     <button class="btn-secondary" id="tx-clear-filters" type="button">
+      Clear filters
+     </button>
+    </div>
+    <ul id="transaction-list">
+    </ul>
+    <div id="tx-pagination">
+     <button class="btn-secondary" id="tx-page-prev" type="button">
+      ← Prev
+     </button>
+     <span id="tx-page-info">
+     </span>
+     <button class="btn-secondary" id="tx-page-next" type="button">
+      Next →
+     </button>
+    </div>
+   </section>
+  </main>
+  <footer class="app-footer">
+   <div class="footer-container">
+    <!-- Left Column: Brand Info -->
+    <div class="footer-brand">
+     <h1>
+      SmartTracker
+     </h1>
+     <p>
+      Empowering your financial journey with
+      <br/>
+      modern tracking and actionable insights.
+     </p>
+    </div>
+    <!-- Center Column: Quick Links -->
+    <div class="footer-links">
+     <h3>
+      Quick Links
+     </h3>
+     <ul>
+      <li>
+       <a href="index.html">
+        Dashboard
+       </a>
+      </li>
+      <li>
+       <a href="transactions.html">
+        Transactions
+       </a>
+      </li>
+      <li>
+       <a href="savings.html">
+        Savings
+       </a>
+      </li>
+      <li>
+       <a href="planning.html">
+        Planning
+       </a>
+      </li>
+      <li>
+       <a href="reports.html">
+        Reports
+       </a>
+      </li>
+      <li>
+       <a href="calendar.html">
+        Calendar
+       </a>
+      </li>
+      <li>
+       <a href="account.html">
+        Account
+       </a>
+      </li>
+     </ul>
+    </div>
+    <!-- Right Column: Logo Container -->
+    <div class="footer-logo-wrapper">
+     <img alt="SmartTracker Logo" class="footer-logo-img" src="images/footer logo.png"/>
+    </div>
+   </div>
+   <div class="footer-bottom">
+    <p>
+     © 2026 SmartTracker. All rights reserved.
+    </p>
+   </div>
+  </footer>
+  <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js">
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth-compat.js">
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js">
+  </script>
+  <script src="js/firebase-config.js">
+  </script>
+  <script src="js/firebase-init.js">
+  </script>
+  <script src="js/main.js">
+  </script>
+  <script src="js/transactions.js">
+  </script>
+ </body>
+</html>

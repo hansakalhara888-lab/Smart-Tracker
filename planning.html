@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <link href="manifest.json" rel="manifest"/>
+  <link href="icons/apple-touch-icon.png" rel="apple-touch-icon"/>
+  <meta content="#4f46e5" name="theme-color"/>
+  <meta content="yes" name="mobile-web-app-capable"/>
+  <meta content="yes" name="apple-mobile-web-app-capable"/>
+  <meta content="SmartTracker" name="apple-mobile-web-app-title"/>
+  <title>
+   Planning - SmartTracker
+  </title>
+  <link href="css/main.css" rel="stylesheet"/>
+  <link href="css/features.css" rel="stylesheet"/>
+  <link href="css/planning.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div aria-hidden="true" id="app-loading-bar">
+  </div>
+  <header class="app-header">
+   <div class="nav-container">
+    <a class="brand-logo" href="index.html">
+     <img alt="SmartTracker Logo" class="brand-logo-img" src="images/logo 2.png"/>
+    </a>
+    <nav class="nav-links" id="nav-links">
+     <a class="nav-link" href="index.html">
+      Dashboard
+     </a>
+     <a class="nav-link" href="transactions.html">
+      Transactions
+     </a>
+     <a class="nav-link" href="savings.html">
+      Savings Target
+     </a>
+     <a class="nav-link active" href="planning.html">
+      Planning
+     </a>
+     <a class="nav-link" href="reports.html">
+      Reports
+     </a>
+     <a class="nav-link" href="calendar.html">
+      Calendar
+     </a>
+     <a class="nav-link" href="account.html">
+      Account
+     </a>
+     <button class="mobile-menu-logout" type="button">
+      Logout
+     </button>
+    </nav>
+    <div class="nav-actions">
+     <button class="btn-theme" id="theme-toggle" type="button">
+      🌙
+     </button>
+     <button class="btn-logout" id="logout-btn" type="button">
+      Logout
+     </button>
+     <button class="hamburger-btn" id="hamburger-btn" type="button">
+      <span>
+      </span>
+      <span>
+      </span>
+      <span>
+      </span>
+     </button>
+    </div>
+   </div>
+  </header>
+  <main>
+   <section class="card">
+    <h1>
+     Financial Planning
+    </h1>
+    <p class="section-note">
+     Budgets, recurring money, bills, subscriptions,
+                debts and custom wallets are stored in Firebase
+                with your account.
+    </p>
+    <div class="subnav">
+     <a href="#budgets">
+      Budgets
+     </a>
+     <a href="#recurring">
+      Recurring
+     </a>
+     <a href="#bills">
+      Bills
+     </a>
+     <a href="#subscriptions">
+      Subscriptions
+     </a>
+     <a href="#debts">
+      Debts &amp; Loans
+     </a>
+     <a href="#wallets">
+      Wallets
+     </a>
+    </div>
+   </section>
+   <section class="card" id="budgets">
+    <h2>
+     Monthly Budgets
+    </h2>
+    <p class="section-note">
+     Set a spending limit for a category.
+                SmartTracker warns at 80% and 100%.
+    </p>
+    <form class="inline-form" id="budget-form">
+     <div class="form-group">
+      <label>
+       Category
+      </label>
+      <input id="budget-category" placeholder="Food" required=""/>
+     </div>
+     <div class="form-group">
+      <label>
+       Monthly limit
+      </label>
+      <input id="budget-limit" min="0.01" required="" step="0.01" type="number"/>
+     </div>
+     <div class="form-action">
+      <button type="submit">
+       Add / Update Budget
+      </button>
+     </div>
+    </form>
+    <div id="budget-list">
+    </div>
+   </section>
+   <section class="card" id="recurring">
+    <h2>
+     Recurring Transactions
+    </h2>
+    <p class="section-note">
+     Due entries are recorded automatically
+                when you open SmartTracker.
+    </p>
+    <form class="inline-form" id="recurring-form">
+     <div class="form-group">
+      <label>
+       Name
+      </label>
+      <input id="rec-name" placeholder="Salary / Rent" required=""/>
+     </div>
+     <div class="form-group">
+      <label>
+       Type
+      </label>
+      <select id="rec-type">
+       <option value="income">
+        Income
+       </option>
+       <option value="expense">
+        Expense
+       </option>
+      </select>
+     </div>
+     <div class="form-group">
+      <label>
+       Category
+      </label>
+      <input id="rec-category" placeholder="Income / Rent" required=""/>
+     </div>
+     <div class="form-group">
+      <label>
+       Wallet
+      </label>
+      <select id="rec-wallet">
+      </select>
+     </div>
+     <div class="form-group">
+      <label>
+       Amount
+      </label>
+      <input id="rec-amount" min="0.01" required="" step="0.01" type="number"/>
+     </div>
+     <div class="form-group">
+      <label>
+       Frequency
+      </label>
+      <select id="rec-frequency">
+       <option value="weekly">
+        Weekly
+       </option>
+       <option selected="" value="monthly">
+        Monthly
+       </option>
+       <option value="yearly">
+        Yearly
+       </option>
+      </select>
+     </div>
+     <div class="form-group">
+      <label>
+       Next date
+      </label>
+      <input id="rec-date" required="" type="date"/>
+     </div>
+     <div class="form-action">
+      <button type="submit">
+       Add Recurring
+      </button>
+     </div>
+    </form>
+    <div id="recurring-list">
+    </div>
+   </section>
+   <section class="card" id="bills">
+    <h2>
+     Bills &amp; Reminders
+    </h2>
+    <form class="inline-form" id="bill-form">
+     <div class="form-group">
+      <label>
+       Bill
+      </label>
+      <input id="bill-name" placeholder="Internet" required=""/>
+     </div>
+     <div class="form-group">
+      <label>
+       Amount
+      </label>
+      <input id="bill-amount" min="0.01" required="" step="0.01" type="number"/>
+     </div>
+     <div class="form-group">
+      <label>
+       Due date
+      </label>
+      <input id="bill-date" required="" type="date"/>
+     </div>
+     <div class="form-group">
+      <label>
+       Category
+      </label>
+      <input id="bill-category" value="Bills"/>
+     </div>
+     <div class="form-group">
+      <label>
+       Wallet
+      </label>
+      <select id="bill-wallet">
+      </select>
+     </div>
+     <label class="form-check">
+      <input id="bill-repeat" type="checkbox"/>
+      Repeat monthly
+     </label>
+     <div class="form-action">
+      <button type="submit">
+       Add Bill
+      </button>
+     </div>
+    </form>
+    <div id="bill-list">
+    </div>
+   </section>
+   <section class="card" id="subscriptions">
+    <h2>
+     Subscriptions
+    </h2>
+    <form class="inline-form" id="subscription-form">
+     <div class="form-group">
+      <label>
+       Service
+      </label>
+      <input id="sub-name" placeholder="Netflix" required=""/>
+     </div>
+     <div class="form-group">
+      <label>
+       Amount
+      </label>
+      <input id="sub-amount" min="0.01" required="" step="0.01" type="number"/>
+     </div>
+     <div class="form-group">
+      <label>
+       Cycle
+      </label>
+      <select id="sub-cycle">
+       <option value="monthly">
+        Monthly
+       </option>
+       <option value="yearly">
+        Yearly
+       </option>
+      </select>
+     </div>
+     <div class="form-group">
+      <label>
+       Next billing date
+      </label>
+      <input id="sub-date" required="" type="date"/>
+     </div>
+     <div class="form-group">
+      <label>
+       Wallet
+      </label>
+      <select id="sub-wallet">
+      </select>
+     </div>
+     <label class="form-check">
+      <input checked="" id="sub-auto" type="checkbox"/>
+      Auto-record payment
+     </label>
+    </form>
+    <div class="subscription-summary" id="subscription-summary">
+    </div>
+    <div id="subscription-list">
+    </div>
+   </section>
+   <section class="card" id="debts">
+    <h2>
+     Debt &amp; Loan Tracker
+    </h2>
+    <form class="inline-form" id="debt-form">
+     <div class="form-group">
+      <label>
+       Name
+      </label>
+      <input id="debt-name" placeholder="Student loan / Money lent" required=""/>
+     </div>
+     <div class="form-group">
+      <label>
+       Type
+      </label>
+      <select id="debt-type">
+       <option value="borrowed">
+        I borrowed (I owe)
+       </option>
+       <option value="lent">
+        I lent (owed to me)
+       </option>
+      </select>
+     </div>
+     <div class="form-group">
+      <label>
+       Principal
+      </label>
+      <input id="debt-principal" min="0.01" required="" step="0.01" type="number"/>
+     </div>
+     <div class="form-group">
+      <label>
+       Interest %
+      </label>
+      <input id="debt-interest" min="0" step="0.01" type="number" value="0"/>
+     </div>
+     <div class="form-group">
+      <label>
+       Due date
+      </label>
+      <input id="debt-date" type="date"/>
+     </div>
+     <div class="form-group">
+      <label>
+       Wallet for payments
+      </label>
+      <select id="debt-wallet">
+      </select>
+     </div>
+     <div class="form-action">
+      <button type="submit">
+       Add Debt / Loan
+      </button>
+     </div>
+    </form>
+    <div id="debt-list">
+    </div>
+   </section>
+   <section class="card" id="wallets">
+    <h2>
+     Custom Wallets
+    </h2>
+    <p class="section-note">
+     Add bank accounts or other wallets.
+                Opening balance is the money already in that wallet
+                before SmartTracker transactions.
+    </p>
+    <form class="inline-form" id="wallet-form">
+     <div class="form-group">
+      <label>
+       Wallet name
+      </label>
+      <input id="wallet-name" placeholder="BOC Savings" required=""/>
+     </div>
+     <div class="form-group">
+      <label>
+       Icon
+      </label>
+      <input id="wallet-icon" maxlength="4" value="👛"/>
+     </div>
+     <div class="form-group">
+      <label>
+       Opening balance
+      </label>
+      <input id="wallet-opening" step="0.01" type="number" value="0"/>
+     </div>
+     <div class="form-action">
+      <button type="submit">
+       Add Wallet
+      </button>
+     </div>
+    </form>
+    <div class="wallet-flex" id="wallet-list">
+    </div>
+   </section>
+  </main>
+  <footer class="app-footer">
+   <div class="footer-container">
+    <!-- Left Column: Brand Info -->
+    <div class="footer-brand">
+     <h1>
+      SmartTracker
+     </h1>
+     <p>
+      Empowering your financial journey with
+      <br/>
+      modern tracking and actionable insights.
+     </p>
+    </div>
+    <!-- Center Column: Quick Links -->
+    <div class="footer-links">
+     <h3>
+      Quick Links
+     </h3>
+     <ul>
+      <li>
+       <a href="index.html">
+        Dashboard
+       </a>
+      </li>
+      <li>
+       <a href="transactions.html">
+        Transactions
+       </a>
+      </li>
+      <li>
+       <a href="savings.html">
+        Savings
+       </a>
+      </li>
+      <li>
+       <a href="planning.html">
+        Planning
+       </a>
+      </li>
+      <li>
+       <a href="reports.html">
+        Reports
+       </a>
+      </li>
+      <li>
+       <a href="calendar.html">
+        Calendar
+       </a>
+      </li>
+      <li>
+       <a href="account.html">
+        Account
+       </a>
+      </li>
+     </ul>
+    </div>
+    <!-- Right Column: Logo Container -->
+    <div class="footer-logo-wrapper">
+     <img alt="SmartTracker Logo" class="footer-logo-img" src="images/footer logo.png"/>
+    </div>
+   </div>
+   <div class="footer-bottom">
+    <p>
+     © 2026 SmartTracker. All rights reserved.
+    </p>
+   </div>
+  </footer>
+  <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js">
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth-compat.js">
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js">
+  </script>
+  <script src="js/firebase-config.js">
+  </script>
+  <script src="js/firebase-init.js">
+  </script>
+  <script src="js/main.js">
+  </script>
+  <script src="js/planning.js">
+  </script>
+ </body>
+</html>

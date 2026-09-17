@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <link href="manifest.json" rel="manifest"/>
+  <link href="icons/apple-touch-icon.png" rel="apple-touch-icon"/>
+  <meta content="#4f46e5" name="theme-color"/>
+  <meta content="yes" name="mobile-web-app-capable"/>
+  <meta content="yes" name="apple-mobile-web-app-capable"/>
+  <meta content="SmartTracker" name="apple-mobile-web-app-title"/>
+  <title>
+   My Account - Money Tracker
+  </title>
+  <link href="css/main.css" rel="stylesheet"/>
+  <link href="css/account.css" rel="stylesheet"/>
+  <link href="css/features.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div aria-hidden="true" id="app-loading-bar">
+  </div>
+  <header class="app-header">
+   <div class="nav-container">
+    <a class="brand-logo" href="index.html">
+     <img alt="SmartTracker Logo" class="brand-logo-img" src="images/logo 2.png"/>
+    </a>
+    <nav class="nav-links" id="nav-links">
+     <a class="nav-link" href="index.html">
+      Dashboard
+     </a>
+     <a class="nav-link" href="transactions.html">
+      Transactions
+     </a>
+     <a class="nav-link" href="savings.html">
+      Savings Target
+     </a>
+     <a class="nav-link" href="planning.html">
+      Planning
+     </a>
+     <a class="nav-link" href="reports.html">
+      Reports
+     </a>
+     <a class="nav-link" href="calendar.html">
+      Calendar
+     </a>
+     <a class="nav-link active" href="account.html">
+      Account
+     </a>
+     <button class="mobile-menu-logout" type="button">
+      Logout
+     </button>
+    </nav>
+    <div class="nav-actions">
+     <button aria-label="Toggle theme" class="btn-theme" id="theme-toggle" type="button">
+      🌙
+     </button>
+     <button class="btn-logout" id="logout-btn" type="button">
+      Logout
+     </button>
+     <button aria-expanded="false" aria-label="Open menu" class="hamburger-btn" id="hamburger-btn" type="button">
+      <span>
+      </span>
+      <span>
+      </span>
+      <span>
+      </span>
+     </button>
+    </div>
+   </div>
+  </header>
+  <main>
+   <section class="card account-hero">
+    <div class="profile-photo-wrap">
+     <img alt="Profile photo" class="profile-photo" id="profile-photo-preview" src=""/>
+     <div class="profile-photo-placeholder" id="profile-photo-placeholder">
+      👤
+     </div>
+     <label class="photo-upload-btn" for="profile-photo-input">
+      Change photo
+     </label>
+     <input accept="image/*" hidden="" id="profile-photo-input" type="file"/>
+    </div>
+    <div class="account-hero-text">
+     <h2 id="account-display-name">
+      My Account
+     </h2>
+     <p id="account-username">
+     </p>
+    </div>
+   </section>
+   <section class="card">
+    <h2>
+     Profile details
+    </h2>
+    <p class="account-style-1">
+     Details from sign-up and extra info you can update anytime.
+    </p>
+    <form id="account-form">
+     <div class="form-row">
+      <div class="form-group">
+       <label for="acc-username">
+        Username
+       </label>
+       <input id="acc-username" readonly="" type="text"/>
+      </div>
+      <div class="form-group">
+       <label for="acc-fullname">
+        Full name
+       </label>
+       <input id="acc-fullname" required="" type="text"/>
+      </div>
+     </div>
+     <div class="form-row">
+      <div class="form-group account-email-group">
+       <label for="acc-email">
+        Account email
+       </label>
+       <input id="acc-email" readonly="" type="email"/>
+       <small class="field-hint">
+        This email is the registered email.
+       </small>
+      </div>
+     </div>
+     <div class="form-row">
+      <div class="form-group">
+       <label for="acc-age">
+        Age
+       </label>
+       <input id="acc-age" min="1" required="" type="number"/>
+      </div>
+      <div class="form-group">
+       <label for="acc-dob">
+        Birthday
+       </label>
+       <input id="acc-dob" required="" type="date"/>
+      </div>
+     </div>
+     <div class="form-row">
+      <div class="form-group">
+       <label for="acc-job">
+        Job / Occupation
+       </label>
+       <input id="acc-job" placeholder="e.g., Software Engineer" type="text"/>
+      </div>
+      <div class="form-group">
+       <label for="acc-country">
+        Country
+       </label>
+       <input id="acc-country" placeholder="e.g., Sri Lanka" type="text"/>
+      </div>
+     </div>
+     <div class="form-group">
+      <label for="acc-phone">
+       Phone (optional)
+      </label>
+      <input id="acc-phone" placeholder="e.g., +94 77 123 4567" type="tel"/>
+     </div>
+     <hr class="form-divider"/>
+     <h3 class="account-style-2">
+      Preferences
+     </h3>
+     <div class="form-group">
+      <label for="acc-currency">
+       Display currency
+      </label>
+      <select id="acc-currency">
+       <option value="LKR">
+        Sri Lankan Rupee (Rs.)
+       </option>
+       <option value="USD">
+        US Dollar ($)
+       </option>
+       <option value="EUR">
+        Euro (€)
+       </option>
+       <option value="GBP">
+        British Pound (£)
+       </option>
+       <option value="INR">
+        Indian Rupee (₹)
+       </option>
+      </select>
+      <small class="account-style-3">
+       This updates amounts across Dashboard, Savings, and Reports.
+      </small>
+     </div>
+     <div class="form-row">
+      <div class="form-group">
+       <label for="acc-theme">
+        Theme
+       </label>
+       <select id="acc-theme">
+        <option value="system">
+         System
+        </option>
+        <option value="light">
+         Light
+        </option>
+        <option value="dark">
+         Dark
+        </option>
+       </select>
+      </div>
+      <div class="form-group">
+       <label for="acc-date-format">
+        Date format
+       </label>
+       <select id="acc-date-format">
+        <option value="DD/MM/YYYY">
+         DD/MM/YYYY
+        </option>
+        <option value="MM/DD/YYYY">
+         MM/DD/YYYY
+        </option>
+        <option value="YYYY-MM-DD">
+         YYYY-MM-DD
+        </option>
+       </select>
+      </div>
+     </div>
+     <div class="save-msg" id="account-save-msg">
+     </div>
+     <button type="submit">
+      Save profile
+     </button>
+    </form>
+   </section>
+   <section class="card data-backup-card">
+    <h2>Data Backup &amp; Restore</h2>
+    <p class="account-style-1">Download a complete SmartTracker backup of your account data, or restore a backup file later. This includes transactions, savings, reports, calendar, planning data, wallets and Dashboard preferences.</p>
+    <div class="backup-actions">
+     <button id="download-backup-btn" type="button">⬇ Download Backup</button>
+     <label class="backup-file-label" for="restore-backup-file">Choose backup JSON</label>
+     <input accept="application/json,.json" id="restore-backup-file" type="file"/>
+    </div>
+    <div class="form-group backup-mode-group">
+     <label for="restore-mode">Restore mode</label>
+     <select id="restore-mode">
+      <option value="merge">Merge with current data (recommended)</option>
+      <option value="replace">Replace current SmartTracker data</option>
+     </select>
+    </div>
+    <button class="btn-secondary" disabled="" id="restore-backup-btn" type="button">Restore Backup</button>
+    <div aria-live="polite" class="save-msg" id="backup-restore-msg"></div>
+   </section>
+   <section class="card">
+    <h2>
+     Change password
+    </h2>
+    <p class="account-style-1">
+     Enter your current password, then choose a new one (at least 6 characters).
+    </p>
+    <form id="password-form">
+     <div class="form-group">
+      <label for="cur-password">
+       Current password
+      </label>
+      <div class="password-field">
+       <input autocomplete="current-password" id="cur-password" required="" type="password"/>
+       <button aria-label="Show password" aria-pressed="false" class="password-toggle" type="button">
+        👁
+       </button>
+      </div>
+     </div>
+     <div class="form-row">
+      <div class="form-group">
+       <label for="new-password">
+        New password
+       </label>
+       <div class="password-field">
+        <input autocomplete="new-password" id="new-password" minlength="6" required="" type="password"/>
+        <button aria-label="Show password" aria-pressed="false" class="password-toggle" type="button">
+         👁
+        </button>
+       </div>
+      </div>
+      <div class="form-group">
+       <label for="confirm-password">
+        Confirm new password
+       </label>
+       <div class="password-field">
+        <input autocomplete="new-password" id="confirm-password" minlength="6" required="" type="password"/>
+        <button aria-label="Show password" aria-pressed="false" class="password-toggle" type="button">
+         👁
+        </button>
+       </div>
+      </div>
+     </div>
+     <div class="save-msg" id="password-msg">
+     </div>
+     <button type="submit">
+      Update password
+     </button>
+    </form>
+   </section>
+   <section class="card danger-zone">
+    <h2 class="account-style-4">
+     Delete account
+    </h2>
+    <p class="account-style-1">
+     This permanently deletes your login and all saved data (transactions, savings, calendar, reports).
+      This cannot be undone.
+    </p>
+    <div class="form-group">
+     <label for="delete-password">
+      Confirm with your password
+     </label>
+     <div class="password-field">
+      <input autocomplete="current-password" id="delete-password" placeholder="Enter password to confirm" type="password"/>
+      <button aria-label="Show password" aria-pressed="false" class="password-toggle" type="button">
+       👁
+      </button>
+     </div>
+    </div>
+    <div class="save-msg" id="delete-msg">
+    </div>
+    <button class="btn-danger-solid" id="delete-account-btn" type="button">
+     Delete my account
+    </button>
+   </section>
+  </main>
+  <footer class="app-footer">
+   <div class="footer-container">
+    <div class="footer-brand">
+     <h1>
+      SmartTracker
+     </h1>
+     <p>
+      Empowering your financial journey with
+      <br/>
+      modern tracking and actionable insights.
+     </p>
+    </div>
+    <div class="footer-links">
+     <h3>
+      Quick Links
+     </h3>
+     <ul>
+      <li>
+       <a href="index.html">
+        Dashboard
+       </a>
+      </li>
+      <li>
+       <a href="transactions.html">
+        Transactions
+       </a>
+      </li>
+      <li>
+       <a href="savings.html">
+        Savings
+       </a>
+      </li>
+      <li>
+       <a href="planning.html">
+        Planning
+       </a>
+      </li>
+      <li>
+       <a href="reports.html">
+        Reports
+       </a>
+      </li>
+      <li>
+       <a href="calendar.html">
+        Calendar
+       </a>
+      </li>
+      <li>
+       <a href="account.html">
+        Account
+       </a>
+      </li>
+     </ul>
+    </div>
+    <div class="footer-logo-wrapper">
+     <img alt="SmartTracker Logo" class="footer-logo-img" src="images/footer logo.png"/>
+    </div>
+   </div>
+   <div class="footer-bottom">
+    <p>
+     © 2026 SmartTracker. All rights reserved.
+    </p>
+   </div>
+  </footer>
+  <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js">
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth-compat.js">
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js">
+  </script>
+  <script src="js/firebase-config.js">
+  </script>
+  <script src="js/firebase-init.js">
+  </script>
+  <script src="js/main.js">
+  </script>
+  <script src="js/account.js">
+  </script>
+ </body>
+</html>

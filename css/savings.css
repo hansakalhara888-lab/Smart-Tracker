@@ -1,0 +1,23 @@
+/* Styles moved out of inline HTML for this page. */
+
+.savings-note {
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+    font-size: 0.9rem;
+}
+
+.savings-deposit-row {
+    display:flex;
+    gap:0.5rem;
+    align-items:center;
+    flex-wrap:wrap;
+}
+
+.savings-wallet-select {
+    min-width:110px;
+}
+
+.savings-deposit-input {
+    flex:1;
+    min-width:140px;
+}

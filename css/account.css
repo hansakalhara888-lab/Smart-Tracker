@@ -1,0 +1,156 @@
+/* Styles moved out of inline HTML for this page. */
+
+#account-username {
+    color:var(--text-muted);
+    margin:0.25rem 0 0;
+}
+
+.account-style-1 {
+    color:var(--text-muted);
+    font-size:0.9rem;
+    margin-bottom:1rem;
+}
+
+.account-style-2 {
+    margin-bottom:0.75rem;
+}
+
+.account-style-3 {
+    color:var(--text-muted);
+}
+
+#account-save-msg {
+    display:none;
+}
+
+#password-msg {
+    display:none;
+}
+
+.account-style-4 {
+    color:var(--danger);
+}
+
+#delete-msg {
+    display:none;
+}
+/* Page-specific styles moved from the original main.css. */
+/* ==================== ACCOUNT PAGE ==================== */
+
+.account-hero {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.profile-photo-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.profile-photo, .profile-photo-placeholder {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--primary-color);
+    background: var(--bg-color);
+}
+
+.profile-photo-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+}
+
+.profile-photo {
+    display: none;
+}
+
+.photo-upload-btn {
+    font-size: 0.85rem;
+    color: var(--primary-color);
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.photo-upload-btn:hover {
+    text-decoration: underline;
+}
+
+.form-row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.form-row .form-group {
+    flex: 1;
+    min-width: 160px;
+}
+
+.form-divider {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: 1.25rem 0;
+}
+
+.save-msg {
+    padding: 0.65rem 0.9rem;
+    border-radius: 8px;
+    margin-bottom: 0.75rem;
+    font-size: 0.9rem;
+}
+
+.save-msg.success {
+    background: #d1fae5;
+    color: #065f46;
+    border: 1px solid #10b981;
+}
+
+body.dark-mode .save-msg.success {
+    background: #064e3b;
+    color: #a7f3d0;
+}
+/* Account security sections */
+
+.danger-zone {
+    border: 1px solid rgba(239, 68, 68, 0.35);
+}
+
+.btn-danger-solid {
+    background: #ef4444 !important;
+    color: #fff !important;
+    border: none !important;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+}
+
+.btn-danger-solid:hover {
+    opacity: 0.9;
+}
+
+.save-msg.error {
+    background: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #ef4444;
+}
+
+body.dark-mode .save-msg.error {
+    background: #7f1d1d;
+    color: #fecaca;
+}
+
+
+/* Data backup & restore */
+.backup-actions { display:flex; align-items:center; gap:0.65rem; flex-wrap:wrap; }
+.backup-file-label { display:inline-flex; align-items:center; justify-content:center; padding:0.75rem 1rem; border:1px solid var(--border-color); border-radius:8px; background:var(--bg-color); color:var(--text-color); font-weight:600; cursor:pointer; }
+#restore-backup-file { max-width:100%; }
+.backup-mode-group { margin-top:1rem; max-width:460px; }
+#backup-restore-msg { display:none; margin-top:0.8rem; }

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <link href="manifest.json" rel="manifest"/>
+  <link href="icons/apple-touch-icon.png" rel="apple-touch-icon"/>
+  <meta content="#4f46e5" name="theme-color"/>
+  <meta content="yes" name="mobile-web-app-capable"/>
+  <meta content="yes" name="apple-mobile-web-app-capable"/>
+  <meta content="SmartTracker" name="apple-mobile-web-app-title"/>
+  <title>
+   Calendar - Money Tracker
+  </title>
+  <link href="css/main.css" rel="stylesheet"/>
+  <link href="css/calendar.css" rel="stylesheet"/>
+  <link href="css/features.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div aria-hidden="true" id="app-loading-bar">
+  </div>
+  <header class="app-header">
+   <div class="nav-container">
+    <a class="brand-logo" href="index.html">
+     <img alt="SmartTracker Logo" class="brand-logo-img" src="images/logo 2.png"/>
+    </a>
+    <nav class="nav-links" id="nav-links">
+     <a class="nav-link" href="index.html">
+      Dashboard
+     </a>
+     <a class="nav-link" href="transactions.html">
+      Transactions
+     </a>
+     <a class="nav-link" href="savings.html">
+      Savings Target
+     </a>
+     <a class="nav-link" href="planning.html">
+      Planning
+     </a>
+     <a class="nav-link" href="reports.html">
+      Reports
+     </a>
+     <a class="nav-link active" href="calendar.html">
+      Calendar
+     </a>
+     <a class="nav-link" href="account.html">
+      Account
+     </a>
+     <button class="mobile-menu-logout" type="button">
+      Logout
+     </button>
+    </nav>
+    <div class="nav-actions">
+     <button aria-label="Toggle theme" class="btn-theme" id="theme-toggle" type="button">
+      🌙
+     </button>
+     <button class="btn-logout" id="logout-btn" type="button">
+      Logout
+     </button>
+     <button aria-expanded="false" aria-label="Open menu" class="hamburger-btn" id="hamburger-btn" type="button">
+      <span>
+      </span>
+      <span>
+      </span>
+      <span>
+      </span>
+     </button>
+    </div>
+   </div>
+  </header>
+  <main>
+   <section class="card">
+    <div class="cal-header">
+     <button aria-label="Previous month" class="cal-nav-btn" id="cal-prev" type="button">
+      ‹
+     </button>
+     <div class="cal-title-wrap">
+      <h2 id="cal-month-title">
+       Month
+      </h2>
+      <p id="cal-today-label">
+      </p>
+     </div>
+     <button aria-label="Next month" class="cal-nav-btn" id="cal-next" type="button">
+      ›
+     </button>
+    </div>
+    <div class="cal-weekdays">
+     <span>
+      Sun
+     </span>
+     <span>
+      Mon
+     </span>
+     <span>
+      Tue
+     </span>
+     <span>
+      Wed
+     </span>
+     <span>
+      Thu
+     </span>
+     <span>
+      Fri
+     </span>
+     <span>
+      Sat
+     </span>
+    </div>
+    <div class="cal-grid" id="cal-grid">
+    </div>
+   </section>
+   <section class="card">
+    <h2>
+     Add event
+    </h2>
+    <form id="event-form">
+     <div class="form-group">
+      <label for="ev-title">
+       Title
+      </label>
+      <input id="ev-title" placeholder="e.g., Pay electricity bill" required="" type="text"/>
+     </div>
+     <div class="form-row">
+      <div class="form-group">
+       <label for="ev-date">
+        Date
+       </label>
+       <input id="ev-date" required="" type="date"/>
+      </div>
+      <div class="form-group">
+       <label for="ev-time">
+        Time
+       </label>
+       <input id="ev-time" required="" type="time" value="09:00"/>
+      </div>
+     </div>
+     <div class="form-group">
+      <label for="ev-remind">
+       Remind me
+      </label>
+      <select id="ev-remind">
+       <option value="0">
+        At event time
+       </option>
+       <option value="15">
+        15 minutes before
+       </option>
+       <option selected="" value="30">
+        30 minutes before
+       </option>
+       <option value="60">
+        1 hour before
+       </option>
+       <option value="1440">
+        1 day before
+       </option>
+      </select>
+     </div>
+     <div class="form-group">
+      <label for="ev-desc">
+       Notes (optional)
+      </label>
+      <input id="ev-desc" placeholder="Extra details" type="text"/>
+     </div>
+     <button type="submit">
+      Add to calendar
+     </button>
+    </form>
+    <button class="btn-secondary" id="enable-notifications" type="button">
+     Enable browser notifications
+    </button>
+   </section>
+   <section class="card">
+    <h2>
+     Upcoming events
+    </h2>
+    <ul class="event-list" id="event-list">
+    </ul>
+   </section>
+   <section class="card">
+    <h2>
+     Selected Day Finance Activity
+    </h2>
+    <p class="section-note">
+     Click a day on the calendar to see transactions, bills and savings activity.
+    </p>
+    <div class="empty-state" id="day-finance-activity">
+     Select a date.
+    </div>
+   </section>
+  </main>
+  <footer class="app-footer">
+   <div class="footer-container">
+    <div class="footer-brand">
+     <h1>
+      SmartTracker
+     </h1>
+     <p>
+      Empowering your financial journey with
+      <br/>
+      modern tracking and actionable insights.
+     </p>
+    </div>
+    <div class="footer-links">
+     <h3>
+      Quick Links
+     </h3>
+     <ul>
+      <li>
+       <a href="index.html">
+        Dashboard
+       </a>
+      </li>
+      <li>
+       <a href="transactions.html">
+        Transactions
+       </a>
+      </li>
+      <li>
+       <a href="savings.html">
+        Savings
+       </a>
+      </li>
+      <li>
+       <a href="planning.html">
+        Planning
+       </a>
+      </li>
+      <li>
+       <a href="reports.html">
+        Reports
+       </a>
+      </li>
+      <li>
+       <a href="calendar.html">
+        Calendar
+       </a>
+      </li>
+      <li>
+       <a href="account.html">
+        Account
+       </a>
+      </li>
+     </ul>
+    </div>
+    <div class="footer-logo-wrapper">
+     <img alt="SmartTracker Logo" class="footer-logo-img" src="images/footer logo.png"/>
+    </div>
+   </div>
+   <div class="footer-bottom">
+    <p>
+     © 2026 SmartTracker. All rights reserved.
+    </p>
+   </div>
+  </footer>
+  <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js">
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth-compat.js">
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js">
+  </script>
+  <script src="js/firebase-config.js">
+  </script>
+  <script src="js/firebase-init.js">
+  </script>
+  <script src="js/main.js">
+  </script>
+  <script src="js/calendar.js">
+  </script>
+ </body>
+</html>

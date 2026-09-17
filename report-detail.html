@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <link href="manifest.json" rel="manifest"/>
+  <link href="icons/apple-touch-icon.png" rel="apple-touch-icon"/>
+  <meta content="#4f46e5" name="theme-color"/>
+  <meta content="yes" name="mobile-web-app-capable"/>
+  <meta content="yes" name="apple-mobile-web-app-capable"/>
+  <meta content="SmartTracker" name="apple-mobile-web-app-title"/>
+  <title>
+   Report Details - Money Tracker
+  </title>
+  <link href="css/main.css" rel="stylesheet"/>
+  <link href="css/report-detail.css" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js">
+  </script>
+  <link href="css/features.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div aria-hidden="true" id="app-loading-bar">
+  </div>
+  <header class="app-header">
+   <div class="nav-container">
+    <a class="brand-logo" href="index.html">
+     <img alt="SmartTracker Logo" class="brand-logo-img" src="images/logo 2.png"/>
+    </a>
+    <nav class="nav-links" id="nav-links">
+     <a class="nav-link" href="index.html">
+      Dashboard
+     </a>
+     <a class="nav-link" href="transactions.html">
+      Transactions
+     </a>
+     <a class="nav-link" href="savings.html">
+      Savings Target
+     </a>
+     <a class="nav-link" href="planning.html">
+      Planning
+     </a>
+     <a class="nav-link active" href="reports.html">
+      Reports
+     </a>
+     <a class="nav-link" href="calendar.html">
+      Calendar
+     </a>
+     <a class="nav-link" href="account.html">
+      Account
+     </a>
+     <button class="mobile-menu-logout" type="button">
+      Logout
+     </button>
+    </nav>
+    <div class="nav-actions">
+     <button aria-label="Toggle theme" class="btn-theme" id="theme-toggle" type="button">
+      🌙
+     </button>
+     <button class="btn-logout" id="logout-btn" type="button">
+      Logout
+     </button>
+     <button aria-expanded="false" aria-label="Open menu" class="hamburger-btn" id="hamburger-btn" type="button">
+      <span>
+      </span>
+      <span>
+      </span>
+      <span>
+      </span>
+     </button>
+    </div>
+   </div>
+  </header>
+  <main>
+   <div class="detail-top-bar">
+    <a class="back-link" href="reports.html">
+     ← Back to Reports
+    </a>
+    <button class="btn-secondary" id="print-report-btn" type="button">
+     Print / Save PDF
+    </button>
+   </div>
+   <section class="card report-hero">
+    <p class="report-kicker" id="report-kicker">
+     Monthly archive
+    </p>
+    <h1 id="report-title">
+     Monthly Report Details
+    </h1>
+    <p class="report-meta" id="report-meta">
+    </p>
+    <div class="stat-grid" id="report-summary">
+     <div class="stat-card balance">
+      <small>
+       Opening Balance
+      </small>
+      <h3 id="detail-opening">
+       Rs. 0.00
+      </h3>
+     </div>
+     <div class="stat-card income">
+      <small>
+       Total Income
+      </small>
+      <h3 id="detail-income">
+       Rs. 0.00
+      </h3>
+     </div>
+     <div class="stat-card expense">
+      <small>
+       Total Expenses
+      </small>
+      <h3 id="detail-expense">
+       Rs. 0.00
+      </h3>
+     </div>
+     <div class="stat-card savings">
+      <small>
+       Total Savings
+      </small>
+      <h3 id="detail-savings">
+       Rs. 0.00
+      </h3>
+     </div>
+     <div class="stat-card balance">
+      <small>
+       Closing Balance
+      </small>
+      <h3 id="detail-balance">
+       Rs. 0.00
+      </h3>
+     </div>
+    </div>
+   </section>
+   <section class="card">
+    <div class="section-head">
+     <h2>
+      Expense by category
+     </h2>
+     <p class="section-sub">
+      Share of spending in this month
+     </p>
+    </div>
+    <div class="breakdown-layout">
+     <div class="chart-wrap">
+      <canvas id="detailCategoryChart">
+      </canvas>
+      <p class="empty-hint" id="chart-empty">
+       No expense categories for this month.
+      </p>
+     </div>
+     <div class="table-wrap">
+      <table class="cat-table" id="category-table">
+       <thead>
+        <tr>
+         <th>
+          Category
+         </th>
+         <th>
+          Amount
+         </th>
+         <th>
+          %
+         </th>
+        </tr>
+       </thead>
+       <tbody id="category-table-body">
+        <tr>
+         <td class="report_detail-style-1" colspan="3">
+          No data
+         </td>
+        </tr>
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </section>
+   <section class="card">
+    <div class="section-head row-between">
+     <div>
+      <h2>
+       Transaction history
+      </h2>
+      <p class="section-sub">
+       All income, expenses and savings in this report
+      </p>
+     </div>
+     <div class="filter-pills" id="tx-filters">
+      <button class="pill active" data-filter="all" type="button">
+       All
+      </button>
+      <button class="pill" data-filter="income" type="button">
+       Income
+      </button>
+      <button class="pill" data-filter="expense" type="button">
+       Expense
+      </button>
+      <button class="pill" data-filter="savings" type="button">
+       Savings
+      </button>
+     </div>
+    </div>
+    <ul class="detail-tx-list" id="detail-tx-list">
+    </ul>
+   </section>
+  </main>
+  <footer class="app-footer">
+   <div class="footer-container">
+    <div class="footer-brand">
+     <h1>
+      SmartTracker
+     </h1>
+     <p>
+      Empowering your financial journey with
+      <br/>
+      modern tracking and actionable insights.
+     </p>
+    </div>
+    <div class="footer-links">
+     <h3>
+      Quick Links
+     </h3>
+     <ul>
+      <li>
+       <a href="index.html">
+        Dashboard
+       </a>
+      </li>
+      <li>
+       <a href="transactions.html">
+        Transactions
+       </a>
+      </li>
+      <li>
+       <a href="savings.html">
+        Savings
+       </a>
+      </li>
+      <li>
+       <a href="planning.html">
+        Planning
+       </a>
+      </li>
+      <li>
+       <a href="reports.html">
+        Reports
+       </a>
+      </li>
+      <li>
+       <a href="calendar.html">
+        Calendar
+       </a>
+      </li>
+      <li>
+       <a href="account.html">
+        Account
+       </a>
+      </li>
+     </ul>
+    </div>
+    <div class="footer-logo-wrapper">
+     <img alt="SmartTracker Logo" class="footer-logo-img" src="images/footer logo.png"/>
+    </div>
+   </div>
+   <div class="footer-bottom">
+    <p>
+     © 2026 SmartTracker. All rights reserved.
+    </p>
+   </div>
+  </footer>
+  <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js">
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth-compat.js">
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js">
+  </script>
+  <script src="js/firebase-config.js">
+  </script>
+  <script src="js/firebase-init.js">
+  </script>
+  <script src="js/main.js">
+  </script>
+  <script src="js/report-detail.js">
+  </script>
+ </body>
+</html>

@@ -1,0 +1,202 @@
+#budget-list,#recurring-list,#bill-list,#subscription-list,#debt-list {
+    margin-top:1rem
+}
+
+.plan-row {
+    border:1px solid var(--border-color);
+    border-radius:10px;
+    padding:1rem;
+    margin:.7rem 0;
+    background:var(--bg-color)
+}
+
+.plan-row-head {
+    display:flex;
+    justify-content:space-between;
+    gap:1rem;
+    align-items:flex-start;
+    flex-wrap:wrap
+}
+
+.plan-row h3 {
+    margin:0 0 .35rem
+}
+
+.muted {
+    color:var(--text-muted)
+}
+/* Planning page form layout: keep every field and main action button the same column width. */
+
+.inline-form {
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:.75rem;
+    align-items:end;
+}
+
+.inline-form .form-group {
+    min-width:0;
+    margin-bottom:0;
+}
+
+.inline-form .form-action {
+    display:flex;
+    align-items:flex-end;
+    align-self:end;
+    min-width:0;
+    width:100%;
+}
+
+.inline-form .form-action button {
+    width:100%;
+    min-height:50px;
+    margin:0;
+    white-space:nowrap;
+}
+/* Checkbox rows sit cleanly in the same grid system. */
+
+.inline-form .form-check {
+    min-height:50px;
+    margin:0;
+    align-self:end;
+}
+
+@media(max-width:1050px) {
+    .inline-form {
+        grid-template-columns:repeat(3,minmax(0,1fr))
+    }
+}
+
+@media(max-width:780px) {
+    .inline-form {
+        grid-template-columns:repeat(2,minmax(0,1fr))
+    }
+}
+
+@media(max-width:560px) {
+    .inline-form {
+        grid-template-columns:1fr
+    }
+    .inline-form .form-action button {
+        min-height:50px
+    }
+    .inline-form .form-check {
+        min-height:auto
+    }
+}
+/* Subscription summary: monthly above yearly, action beside yearly */
+
+.subscription-summary {
+    display:grid;
+    grid-template-columns:minmax(0,1fr) minmax(180px,1fr);
+    gap:.75rem;
+    align-items:end;
+    margin-top:1rem;
+}
+
+.subscription-estimates {
+    display:grid;
+    grid-template-columns:1fr;
+    gap:.75rem
+}
+
+.subscription-add-action {
+    display:flex;
+    align-items:flex-end
+}
+
+.subscription-add-action button {
+    width:100%;
+    min-height:50px;
+    margin:0
+}
+
+@media(max-width:700px) {
+    .subscription-summary {
+        grid-template-columns:1fr
+    }
+    .subscription-add-action button {
+        min-height:50px
+    }
+}
+/* Debt & Loan: keep the main action directly under the Interest % column on desktop. */
+
+@media (min-width:1051px) {
+    #debt-form .form-action {
+        grid-column:4;
+    }
+}
+/* Custom Wallets: equal control heights and a small gap before wallet cards. */
+
+#wallet-form input, #wallet-form select, #wallet-form .form-action button {
+    height: 50px;
+    min-height: 50px ;
+    box-sizing: border-box;
+}
+
+#wallet-list {
+    margin-top: .75rem;
+}
+/* Monthly Budget: make the action button exactly match the two input controls. */
+
+#budget-form .form-group input, #budget-form .form-group select, #budget-form .form-action, #budget-form .form-action button {
+    height: 50px;
+    min-height: 50px;
+}
+
+#budget-form .form-action {
+    align-self: end;
+}
+
+#budget-form .form-action button {
+    padding: .75rem 1rem;
+    margin: 0;
+}
+
+@media(max-width:560px) {
+    #budget-form .form-group input,   #budget-form .form-group select,   #budget-form .form-action,   #budget-form .form-action button {
+        height: 50px;
+        min-height: 50px;
+    }
+}
+/* Bills and Debt/Loan: main action buttons exactly match adjacent controls. */
+
+#bill-form .form-action, #bill-form .form-action button, #debt-form .form-action, #debt-form .form-action button {
+    height: 50px;
+    min-height: 50px;
+    box-sizing: border-box;
+}
+
+#bill-form .form-action button, #debt-form .form-action button {
+    padding: .75rem 1rem;
+    margin: 0;
+}
+
+@media(max-width:560px) {
+    #bill-form .form-action,   #bill-form .form-action button,   #debt-form .form-action,   #debt-form .form-action button {
+        height: 50px;
+        min-height: 50px;
+    }
+}
+/* FINAL Planning control height lock: inputs/selects and main action buttons must be identical. */
+
+.inline-form .form-group > input, .inline-form .form-group > select, .inline-form .form-action, .inline-form .form-action > button {
+    height: 50px !important;
+    min-height: 50px !important;
+    max-height: 50px !important;
+    box-sizing: border-box !important;
+}
+
+.inline-form .form-action > button {
+    padding: 0 1rem !important;
+    line-height: 1.2 !important;
+    margin: 0 !important;
+}
+
+@media(max-width:560px) {
+    .inline-form .form-group > input,   .inline-form .form-group > select,   .inline-form .form-action,   .inline-form .form-action > button {
+        height: 50px !important;
+        min-height: 50px !important;
+        max-height: 50px !important;
+    }
+}

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <link href="manifest.json" rel="manifest"/>
+  <link href="icons/apple-touch-icon.png" rel="apple-touch-icon"/>
+  <meta content="#4f46e5" name="theme-color"/>
+  <meta content="yes" name="mobile-web-app-capable"/>
+  <meta content="yes" name="apple-mobile-web-app-capable"/>
+  <meta content="SmartTracker" name="apple-mobile-web-app-title"/>
+  <title>
+   Account Access - Money Tracker
+  </title>
+  <link href="css/main.css" rel="stylesheet"/>
+  <link href="css/login.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <!-- Floating Dark/Light Mode Button -->
+  <button class="theme-toggle-btn" id="theme-toggle">
+   🌙
+  </button>
+  <main class="login-container">
+   <div class="login-brand">
+    <img alt="SmartTracker Logo" class="login-brand-logo" src="images/logo 2.png"/>
+    <h1 class="login-brand-name">
+     Smart
+     <span>
+      Tracker
+     </span>
+    </h1>
+    <p class="login-brand-tagline">
+     Track income, expenses, savings and bills in one place.
+    </p>
+    <p class="login-greeting" id="login-greeting">
+    </p>
+   </div>
+   <section class="card login-card login-style-1">
+    <!-- REGISTER FORM -->
+    <div id="register-box">
+     <h2>
+      Create Account
+     </h2>
+     <p class="login-style-2">
+      Set up your account details and password.
+     </p>
+     <form id="register-form">
+      <div class="form-field">
+       <label class="login-style-3">
+        Username
+       </label>
+       <input id="reg-username" required="" type="text"/>
+      </div>
+      <div class="form-field">
+       <label class="login-style-3">
+        Full Name
+       </label>
+       <input autocomplete="name" id="reg-fullname" required="" type="text"/>
+      </div>
+      <div class="form-field">
+       <label class="login-style-3">
+        Email Address
+       </label>
+       <input autocomplete="email" id="reg-email" placeholder="you@example.com" required="" type="email"/>
+      </div>
+      <div class="birthday-grid">
+       <div class="form-field birthday-age-field">
+        <label for="reg-age">
+         Age
+        </label>
+        <input id="reg-age" inputmode="numeric" max="120" min="1" required="" type="number"/>
+       </div>
+       <div class="form-field">
+        <label for="reg-birth-year">
+         Birth year
+        </label>
+        <input aria-readonly="true" id="reg-birth-year" placeholder="Year" readonly="" required="" type="number"/>
+       </div>
+       <div class="form-field">
+        <label for="reg-birth-month">
+         Month
+        </label>
+        <select id="reg-birth-month" required="">
+         <option selected="" value="0">
+          0 - Select
+         </option>
+         <option value="01">
+          01 - January
+         </option>
+         <option value="02">
+          02 - February
+         </option>
+         <option value="03">
+          03 - March
+         </option>
+         <option value="04">
+          04 - April
+         </option>
+         <option value="05">
+          05 - May
+         </option>
+         <option value="06">
+          06 - June
+         </option>
+         <option value="07">
+          07 - July
+         </option>
+         <option value="08">
+          08 - August
+         </option>
+         <option value="09">
+          09 - September
+         </option>
+         <option value="10">
+          10 - October
+         </option>
+         <option value="11">
+          11 - November
+         </option>
+         <option value="12">
+          12 - December
+         </option>
+        </select>
+       </div>
+       <div class="form-field">
+        <label for="reg-birth-day">
+         Day
+        </label>
+        <input id="reg-birth-day" inputmode="numeric" max="31" min="1" required="" type="number" value="0"/>
+       </div>
+      </div>
+      <div class="form-field">
+       <label class="login-style-3">
+        Password
+       </label>
+       <div class="password-field">
+        <input autocomplete="new-password" id="reg-password" minlength="6" required="" type="password"/>
+        <button aria-label="Show password" aria-pressed="false" class="password-toggle" type="button">
+         👁
+        </button>
+       </div>
+      </div>
+      <div class="form-field">
+       <label class="login-style-3">
+        Re-enter Password
+       </label>
+       <div class="password-field">
+        <input autocomplete="new-password" id="reg-confirm-password" minlength="6" required="" type="password"/>
+        <button aria-label="Show password" aria-pressed="false" class="password-toggle" type="button">
+         👁
+        </button>
+       </div>
+      </div>
+      <div id="register-error">
+      </div>
+      <button class="login-style-4" type="submit">
+       Create Account
+      </button>
+     </form>
+     <div class="auth-divider">
+      <span>
+       or
+      </span>
+     </div>
+     <button class="google-auth-btn" data-google-auth="" type="button">
+      <span class="google-g">
+       G
+      </span>
+      <span>
+       Continue with Google
+      </span>
+     </button>
+     <p class="login-style-5">
+      Already have an account?
+      <a href="#" id="to-login-btn">
+       Login here
+      </a>
+     </p>
+    </div>
+    <!-- LOGIN FORM -->
+    <div id="login-box">
+     <h2>
+      Account Login
+     </h2>
+     <p class="login-style-2">
+      Enter your email address and password.
+     </p>
+     <form id="login-form">
+      <div class="form-field">
+       <label class="login-style-3">
+        Email Address
+       </label>
+       <input autocomplete="email" id="login-email" placeholder="you@example.com" required="" type="email"/>
+      </div>
+      <div class="form-field">
+       <label class="login-style-3">
+        Password
+       </label>
+       <div class="password-field">
+        <input autocomplete="current-password" id="login-password" required="" type="password"/>
+        <button aria-label="Show password" aria-pressed="false" class="password-toggle" type="button">
+         👁
+        </button>
+       </div>
+      </div>
+      <div id="login-error">
+      </div>
+      <button class="login-style-4" type="submit">
+       Login
+      </button>
+     </form>
+     <div class="auth-divider">
+      <span>
+       or
+      </span>
+     </div>
+     <button class="google-auth-btn" data-google-auth="" type="button">
+      <span class="google-g">
+       G
+      </span>
+      <span>
+       Continue with Google
+      </span>
+     </button>
+     <p class="login-style-6">
+      <a href="#" id="forgot-password-btn">
+       Forgot password?
+      </a>
+     </p>
+     <div id="auth-status">
+     </div>
+     <button id="resend-verification-btn" type="button">
+      Resend verification email
+     </button>
+     <p class="login-style-5">
+      Need to set up a new profile?
+      <a href="#" id="to-register-btn">
+       Create Account
+      </a>
+     </p>
+    </div>
+   </section>
+  </main>
+  <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js">
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth-compat.js">
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js">
+  </script>
+  <script src="js/firebase-config.js">
+  </script>
+  <script src="js/firebase-init.js">
+  </script>
+  <script src="js/main.js">
+  </script>
+  <script src="js/login.js">
+  </script>
+ </body>
+</html>
