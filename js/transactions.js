@@ -46,7 +46,7 @@ onAppReady(() =>  {
         }
     }
     populateWalletSelects();
-    const TX_PAGE_SIZE = 15;
+    const TX_PAGE_SIZE = 10;
     let txPage = 1;
     let formDirty = false;
     let suppressDirty = false;
